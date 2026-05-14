@@ -2,10 +2,13 @@
 
 WIP
 
+for game BeatSaber.
+
 a library for Simple Stupid Localization
 
-
 it's not thread safe, only works in main thread.
+
+All mods shares the same key pool, so prefix your key with something like your mod id.
 
 # Usage
 

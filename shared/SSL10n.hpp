@@ -1,8 +1,9 @@
 #pragma once
 
+#include "beatsaber-hook/shared/utils/typedefs-wrappers.hpp"
 #include <fmt/base.h>
 #include <fmt/format.h>
-#include <functional>
+#include <locale>
 #include <string>
 
 #ifdef SSLOCAL_MAIN_MOD
@@ -42,13 +43,11 @@ namespace SSL10n {
         L_Arabic,
         L_Bosnian,
     };
-    using callback_id_ty = int;
 
     SSLOCAL_EXTERN std::string Get(const std::string& key);
-    SSLOCAL_EXTERN std::string Get(const std::string& key, Language forLang);
-    /* returns callback id that can be use for remove */
-    SSLOCAL_EXTERN callback_id_ty AddLangChangeCallback(std::function<void(void)>);
-    SSLOCAL_EXTERN void RemoveLangChangeCallback(callback_id_ty callbackId);
+    SSLOCAL_EXTERN std::string Get(const std::string& key, Language forLang, bool withFallback = false);
+
+    extern SSLOCAL_EXTERN EventCallback<> OnLanguageChangeCallback;
 
     SSLOCAL_EXTERN Language GetCurrentLanguage();
 
@@ -70,31 +69,24 @@ namespace SSL10n {
     }
 
     namespace LanguageController {
-        // called by mods to inform the mods' ui are dirty, and will not updated unless game restart
-        SSLOCAL_EXTERN void InformDirtyUI();
-
         // these funcs should be called by language controller
         SSLOCAL_EXTERN void SetCurrentLanguage(Language nextLanguage);
-        SSLOCAL_EXTERN bool IsUIDirty();
     }
+
+    SSLOCAL_EXTERN const std::locale& GetCurrentLocale();
+    SSLOCAL_EXTERN const std::locale& GetLanguageLocale(Language lang);
 
     template <typename... T>
     std::string FormatKeyWithDefault(std::string key, fmt::format_string<T...> fmt, T&&... args){
         std::string r = Get(key);
         if(r == key){
-            return fmt::vformat(fmt, fmt::make_format_args(args...));
+            return fmt::vformat(GetCurrentLocale(), fmt, fmt::make_format_args(args...));
         }else{
-            return fmt::vformat(r, fmt::make_format_args(args...));
+            return fmt::vformat(GetCurrentLocale(), r, fmt::make_format_args(args...));
         }
     }
     template <typename... T>
     std::string FormatKey(std::string key, T&&... args){
-        return fmt::vformat(Get(key), fmt::make_format_args(args...));
+        return fmt::vformat(GetCurrentLocale(), Get(key), fmt::make_format_args(args...));
     }
-    namespace CommonKeys {
-        inline const char * YES = "SSLOCAL_YES";
-        inline const char * NO = "SSLOCAL_NO";
-        inline const char * CANCEL = "SSLOCAL_CANCEL";
-    }
-
 }

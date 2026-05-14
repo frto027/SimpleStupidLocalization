@@ -1,8 +1,12 @@
+#include "SSL10n.hpp"
 #include "SSLocalInternal.hpp"
 #include "beatsaber-hook/shared/utils/utils-functions.h"
+#include "main.hpp"
+#include <ctime>
 #include <sstream>
 #include <string>
 #include <string_view>
+#include <time.h>
 #include <vector>
 
 namespace SSL10n{
@@ -73,6 +77,11 @@ namespace SSL10n{
                 }
             }
             void parse_csv(std::string_view str){
+                struct timespec time_start, time_end;
+                size_t file_size = str.size();
+                
+                clock_gettime(CLOCK_MONOTONIC, &time_start);
+
                 std::vector<std::vector<std::string>> lines;
                 while(str.size() > 0){
                     std::vector<std::string> line;
@@ -98,15 +107,22 @@ namespace SSL10n{
                     if(line.size() < 1)
                         continue;
                     std::string key = line[0];
+                    auto & keyStorage = langMaps[key];
                     for(int i=2;i<line.size(); i++){
                         int lang = i - 2;
-                        if(lang >= SS_LANG_COUNT)
+                        if(lang < L_English || lang > L_Bosnian)
                             break;
                         if(line[i].size() == 0)
                             continue;
-                        langMaps[lang][key].value = line[i];
+                        keyStorage.values[lang] = line[i];
+                        keyStorage.valueExists.set(lang);
                     }
                 }
+
+                clock_gettime(CLOCK_MONOTONIC, &time_end);
+                long long elapsed_ns = (time_end.tv_sec - time_start.tv_sec) * 1000000000LL + 
+                        (time_end.tv_nsec - time_start.tv_nsec);
+                PaperLogger.info("Parsed polyglot csv file, file size= {} bytes, parse time= {} ns", file_size, elapsed_ns);
             }
         }
     }
@@ -140,19 +156,23 @@ void SSL10n::Database::PolyglotFormat::AddCSVContent(const char * text, int size
 
 void SSL10n::Database::AddKeyValue(const std::string& key, const std::string& value, Language forLanguage){
     if(forLanguage >= 0 && forLanguage < SS_LANG_COUNT){
-        langMaps[forLanguage][key].value = value;
+        auto & elem = langMaps[key];
+        elem.values[forLanguage] = value;
+        elem.valueExists.set(forLanguage);
     }
 }
 
 namespace SSL10n {
     namespace Database {
         struct HelperStorage{
-            std::map<std::string, ValueStorage> *dict;
+            bool isValid;
+            Language forLang;
             HelperStorage(Language lang){
                 if(lang >= 0 && lang < SS_LANG_COUNT){
-                    dict = &langMaps[lang];
+                    isValid = true;
+                    forLang = lang;
                 }else{
-                    dict = nullptr;
+                    isValid = false;
                 }
             }
         };
@@ -164,8 +184,10 @@ SSL10n::Database::Helper::Helper(Language lang){
 }
 
 SSL10n::Database::Helper& SSL10n::Database::Helper::p(const std::string & key, const std::string& value){
-    if(storage->dict){
-        (*(storage->dict))[key].value = value;
+    if(storage->isValid){
+        auto & elem = langMaps[key];
+        elem.values[storage->forLang] = value;
+        elem.valueExists.set(storage->forLang);
     }
     return *this;
 }
