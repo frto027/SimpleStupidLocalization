@@ -13,7 +13,7 @@
 #include "beatsaber-hook/shared/utils/logging.hpp"
 
 
-#include "paper/shared/logger.hpp"
+#include "paper2_scotland2/shared/logger.hpp"
 
 #include "_config.hpp"
 
@@ -21,4 +21,4 @@
 // log information from other files
 Configuration &getConfig();
 
-constexpr auto PaperLogger = Paper::ConstLoggerContext("ssi18n");
+constexpr auto PaperLogger = Paper::ConstLoggerContext("ssl10n");
