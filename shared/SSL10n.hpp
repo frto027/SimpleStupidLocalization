@@ -71,6 +71,7 @@ namespace SSL10n {
     namespace LanguageController {
         // these funcs should be called by language controller
         SSLOCAL_EXTERN void SetCurrentLanguage(Language nextLanguage);
+        SSLOCAL_EXTERN void SetFollowGameLanguage(bool followGameLanguage);
     }
 
     SSLOCAL_EXTERN const std::locale& GetCurrentLocale();

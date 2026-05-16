@@ -59,7 +59,9 @@ Same goes for `qpm s copy` and `qpm s qmod`
 
 ## Bump Guide
 
-
+- update qpm.json, qpm.shared.json
+- update GameHooks.cpp if it broken (unlikely)
+- update GameKeys.hpp with `scripts/update_source.py`
 
 ## Credits
 

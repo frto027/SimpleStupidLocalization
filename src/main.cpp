@@ -1,10 +1,10 @@
 #include "main.hpp"
 
+#include "GameHooks.hpp"
 #include "SSL10n.hpp"
 #include "scotland2/shared/modloader.h"
 #include <fmt/base.h>
 #include <fmt/format.h>
-#include "polyglot_csv.inl"
 
 static modloader::ModInfo modInfo{MOD_ID, VERSION, 0};
 // Stores the ID and version of our mod, and is sent to
@@ -26,8 +26,6 @@ MOD_EXTERN_FUNC void setup(CModInfo *info) noexcept {
   // File logging
   Paper::Logger::RegisterFileContextId(PaperLogger.tag);
 
-  SSL10n::Database::PolyglotFormat::AddCSVContent((char*)polyglot_csv, sizeof(polyglot_csv));
-
   PaperLogger.info("Completed setup!");
 }
 
@@ -36,6 +34,6 @@ MOD_EXTERN_FUNC void late_load() noexcept {
   il2cpp_functions::Init();
 
   PaperLogger.info("Installing hooks...");
-
+  SSL10n::GameHooks::Init();
   PaperLogger.info("Installed all hooks!");
 }

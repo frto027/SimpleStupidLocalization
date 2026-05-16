@@ -56,6 +56,11 @@
         "additionalData": {}
       },
       {
+        "id": "bs-cordl",
+        "versionRange": "^4008.0.0",
+        "additionalData": {}
+      },
+      {
         "id": "scotland2",
         "versionRange": "^0.1.6",
         "additionalData": {
@@ -96,22 +101,27 @@
     },
     {
       "dependency": {
-        "id": "paper2_scotland2",
-        "versionRange": "=4.7.0",
+        "id": "bs-cordl",
+        "versionRange": "=4008.0.0",
         "additionalData": {
-          "soLink": "https://github.com/Fernthedev/paperlog/releases/download/v4.7.0/libpaper2_scotland2.so",
-          "overrideSoName": "libpaper2_scotland2.so",
-          "modLink": "https://github.com/Fernthedev/paperlog/releases/download/v4.7.0/paper2_scotland2.qmod",
-          "branchName": "version/v4_7_0",
+          "headersOnly": true,
+          "branchName": "version/v4008_0_0",
           "compileOptions": {
-            "systemIncludes": [
-              "shared/utfcpp/source"
+            "includePaths": [
+              "include"
+            ],
+            "cppFeatures": [],
+            "cppFlags": [
+              "-DNEED_UNSAFE_CSHARP",
+              "-fdeclspec",
+              "-DUNITY_2021",
+              "-DHAS_CODEGEN",
+              "-Wno-invalid-offsetof"
             ]
-          },
-          "cmake": false
+          }
         }
       },
-      "version": "4.7.0"
+      "version": "4008.0.0"
     },
     {
       "dependency": {
@@ -132,6 +142,25 @@
         }
       },
       "version": "6.4.2"
+    },
+    {
+      "dependency": {
+        "id": "paper2_scotland2",
+        "versionRange": "=4.7.0",
+        "additionalData": {
+          "soLink": "https://github.com/Fernthedev/paperlog/releases/download/v4.7.0/libpaper2_scotland2.so",
+          "overrideSoName": "libpaper2_scotland2.so",
+          "modLink": "https://github.com/Fernthedev/paperlog/releases/download/v4.7.0/paper2_scotland2.qmod",
+          "branchName": "version/v4_7_0",
+          "compileOptions": {
+            "systemIncludes": [
+              "shared/utfcpp/source"
+            ]
+          },
+          "cmake": false
+        }
+      },
+      "version": "4.7.0"
     },
     {
       "dependency": {
