@@ -8,8 +8,7 @@ SRCS := test_compile/GameHooks.cpp \
 
 INCLUDES := -I$(REPO_ROOT)include \
             -I$(REPO_ROOT)shared \
-            -I$(REPO_ROOT)tests/test_include \
-            -I$(REPO_ROOT)extern/includes/fmt/fmt/include
+            -I$(REPO_ROOT)tests/test_include 
 
 LIBS := -lfmt
 
@@ -17,6 +16,8 @@ CXX := clang++
 CXXFLAGS := -g
 
 test1.run: mains/test1.cpp $(SRCS)
+	$(CXX) $(CXXFLAGS) -o $@ $< $(SRCS) $(INCLUDES) $(LIBS)
+test_fmt.run: mains/test_fmt.cpp $(SRCS)
 	$(CXX) $(CXXFLAGS) -o $@ $< $(SRCS) $(INCLUDES) $(LIBS)
 
 csv_loader.run: mains/csv_loader.cpp $(SRCS)
