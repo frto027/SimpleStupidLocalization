@@ -21,4 +21,4 @@
 // log information from other files
 Configuration &getConfig();
 
-constexpr auto PaperLogger = Paper::ConstLoggerContext("ssl10n");
+constexpr auto PaperLogger = Paper::ConstLoggerContext("sslocalization");
