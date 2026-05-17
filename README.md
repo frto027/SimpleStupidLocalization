@@ -86,7 +86,7 @@ void late_load(){
 
 - update qpm.json, qpm.shared.json
 - update GameHooks.cpp if it broken (unlikely)
-- update GameKeys.hpp with `scripts/update_source.py`
+- update GameKeys.hpp with `scripts/update_source.py`. after this, don't forget add a game version in the file manually.
 
 ## Credits
 
