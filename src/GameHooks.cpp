@@ -1,55 +1,35 @@
 #include "GameHooks.hpp"
-#include "BGLib/Polyglot/CsvReader.hpp"
-#include "UnityEngine/PlayerPrefs.hpp"
 #include "SSL10n.hpp"
-#include "UnityEngine/zzzz__PlayerPrefs_def.hpp"
 #include "beatsaber-hook/shared/utils/hooking.hpp"
-#include "GlobalNamespace/MenuTransitionsHelper.hpp"
-#include "BGLib/Polyglot/CsvReader.hpp"
-#include "BGLib/Polyglot/Localization.hpp"
 #include "main.hpp"
 #include "SSLocalInternal.hpp"
 
-#if 0
+#include "BGLib/Polyglot/Language.hpp"
+#include "BGLib/Polyglot/CsvReader.hpp"
+#include "BGLib/Polyglot/ILocalize.hpp"
 #include "BGLib/Polyglot/Localization.hpp"
 #include "BGLib/Polyglot/LocalizationModel.hpp"
-#include "BGLib/Polyglot/Language.hpp"
-static void SyncPolyglotLanguageFromPolyglot(){
-    switch(BGLib::Polyglot::Localization::get_Instance()->get_SelectedLanguage()){
+#include "BGLib/Polyglot/LocalizationImporter.hpp"
+#include "BGLib/Polyglot/LocalizationAsyncInstaller.hpp"
+
+static bool SyncPolyglotLanguageFromPolyglot(BGLib::Polyglot::LocalizationModel * instance){
+    switch(instance->get_SelectedLanguage()){
 
         #define CASE(lang)                                                          \
             case BGLib::Polyglot::Language::lang:                                   \
+                if(SSL10n::GetCurrentLanguage() == SSL10n::L_##lang)                \
+                    return false;                                                   \
                 SSL10n::LanguageController::SetCurrentLanguage(SSL10n::L_##lang);   \
-            break;
+                return true;
         FOR_EACH_LANGUAGES(CASE)
         #undef CASE
 
         default:
-            break;
+            return false;
     }
 }
-#endif
 
-// handle soft restart
-// FIXME: use other hook site
-MAKE_HOOK_MATCH(
-    MenuTransitionsHelper_RestartGame,
-    &GlobalNamespace::MenuTransitionsHelper::RestartGame,
-    void,
-    GlobalNamespace::MenuTransitionsHelper* self,
-    System::Action_1<Zenject::DiContainer*>* finishCallback
-) {
-    PaperLogger.info("handle soft restart");
-
-    if(followGameLanguage){
-        int selectedLanguage = UnityEngine::PlayerPrefs::GetInt("Polyglot.SelectedLanguage", -1);
-        if(selectedLanguage >= SSL10n::L_English && selectedLanguage < SSL10n::L_Bosnian){
-            SSL10n::LanguageController::SetCurrentLanguage((SSL10n::Language)selectedLanguage);
-        }
-    }
-    MenuTransitionsHelper_RestartGame(self, finishCallback);
-}
-
+// load KVs from the game
 MAKE_HOOK_MATCH(
     Polyglot_CsvParser,
     &BGLib::Polyglot::CsvReader::Parse,
@@ -62,7 +42,22 @@ MAKE_HOOK_MATCH(
     return Polyglot_CsvParser(src);
 }
 
+// sync game language settings
+MAKE_HOOK_MATCH(Localization_SetSelectLang, &BGLib::Polyglot::LocalizationModel::set_SelectedLanguage, 
+    void,
+    ::BGLib::Polyglot::LocalizationModel * self,
+    ::BGLib::Polyglot::Language lang){
+    Localization_SetSelectLang(self, lang);
+    
+    if(followGameLanguage){
+        PaperLogger.info("On localize executed");
+        if(SyncPolyglotLanguageFromPolyglot(self)){
+            PaperLogger.info("Language has been updated to {}.", (int)SSL10n::GetCurrentLanguage());
+        }
+    }
+}
+
 void SSL10n::GameHooks::Init(){
-    INSTALL_HOOK(PaperLogger, MenuTransitionsHelper_RestartGame);
+    INSTALL_HOOK(PaperLogger, Localization_SetSelectLang);
     INSTALL_HOOK(PaperLogger, Polyglot_CsvParser);
 }
