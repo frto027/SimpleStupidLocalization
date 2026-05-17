@@ -5,7 +5,7 @@
 #include <map>
 #include "SSL10n.hpp"
 
-#define SS_LANG_COUNT 18
+#define SS_LANG_COUNT 28
 
 struct KeyStorage{
     std::bitset<SS_LANG_COUNT> valueExists;
