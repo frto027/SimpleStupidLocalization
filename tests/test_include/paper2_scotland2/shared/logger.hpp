@@ -8,7 +8,7 @@ namespace Paper{
         const char * tag = "";
         template <typename... T>
         void info(fmt::format_string<T...> fmt, T&&... args)const{
-            std::cout << fmt::format(fmt, args...);
+            std::cout << fmt::format(fmt, args...) << std::endl;
         }
     };
     constexpr inline PaperContext ConstLoggerContext(const char *){

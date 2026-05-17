@@ -144,7 +144,7 @@ void SSL10n::Database::PolyglotFormat::AddCSVFile(const std::string& path){
             break;
         }
     }
-    if(i != file_size || !feof(file)){
+    if(i != file_size){
         fclose(file);
         return;
     }

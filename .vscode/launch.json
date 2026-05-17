@@ -3,11 +3,18 @@
     "configurations": [
         {
             "type": "lldb",
-            "request": "launch",
+            "request": "launch test1",
             "name": "Launch Test program",
             "program": "${workspaceFolder}/tests/test1.run",
             "args": [],
             "cwd": "${workspaceFolder}"
+        },{
+            "type": "lldb",
+            "request": "launch",
+            "name": "Launch csv_loader program",
+            "program": "${workspaceFolder}/tests/csv_loader.run",
+            "args": ["csv_files/PolyglotGamedev - Master.csv"],
+            "cwd": "${workspaceFolder}/tests"
         },
         {
             "name": "Launch Beat Saber",
