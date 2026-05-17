@@ -1,5 +1,5 @@
 #include "GameHooks.hpp"
-#include "BGLib/Polyglot/zzzz__CsvReader_def.hpp"
+#include "BGLib/Polyglot/CsvReader.hpp"
 #include "UnityEngine/PlayerPrefs.hpp"
 #include "SSL10n.hpp"
 #include "UnityEngine/zzzz__PlayerPrefs_def.hpp"

@@ -8,6 +8,7 @@
 #include <string_view>
 #include <time.h>
 #include <vector>
+#include <filesystem>
 
 namespace SSL10n{
     namespace Database {
