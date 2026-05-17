@@ -9,8 +9,10 @@ dnf install libfmt-devel
 apt install libfmt-dev
 ```
 
-build
+build and test
 ```bash
 cd tests
-./build.sh
+make test1.run && ./test1.run
 ```
+
+add more main functions to mains for test
