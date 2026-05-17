@@ -67,10 +67,9 @@ void late_load(){
 
     /* 
         You can update your UI when language changes.
-        This is not required. The localize mod will tell players restart the game
-        if you have dirty key didn't accessed after lang change.
+        This is not required. You can handle the UI changes at anytime you want.
     */
-    AddLangChangeCallback([](){
+    SSL10n::OnLanguageChangeCallback.addCallback([](){
         std::string result = SSL10n::Get("MYMOD_key1");
         some_log(result);
     });
