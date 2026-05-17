@@ -42,7 +42,7 @@ std::string SSL10n::Get(const std::string& key, Language forLang, bool withFallb
         if(it->second.valueExists.test(forLang))[[likely]]{
             return it->second.values[forLang];
         }
-        if(!withFallback)[[likely]]{
+        if(withFallback)[[unlikely]]{
             while(true){
                 if(forLang == L_English)
                     return key;
