@@ -41,14 +41,14 @@ void late_load(){
     SSL10n::Database::AddKeyValue("MYMOD_KEY", "en_value"); // for english
     SSL10n::Database::AddKeyValue("MYMOD_KEY", "sc_value", SSL10n::L_Simplified_Chinese);
     SSL10n::Database::Helper()
-        .p("MY_FORMAT_KEY", "answer is {}")
-        .p("MYMOD_key1","en_value1")
-        .p("MYMOD_key2","en_value2")
-        .p("MYMOD_key3","en_value3");
+        .v("MY_FORMAT_KEY", "answer is {}")
+        .v("MYMOD_key1","en_value1")
+        .v("MYMOD_key2","en_value2")
+        .v("MYMOD_key3","en_value3");
     SSL10n::Database::Helper(SSL10n::L_Simplified_Chinese)
-        .p("MYMOD_key1","sc_value1")
-        .p("MYMOD_key2","sc_value2")
-        .p("MYMOD_key3","sc_value3");
+        .v("MYMOD_key1","sc_value1")
+        .v("MYMOD_key2","sc_value2")
+        .v("MYMOD_key3","sc_value3");
 
     /* 
         to get the result of current language, just use SSL10n::Get

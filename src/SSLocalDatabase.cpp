@@ -184,7 +184,7 @@ SSL10n::Database::Helper::Helper(Language lang){
     storage = new HelperStorage(lang);
 }
 
-SSL10n::Database::Helper& SSL10n::Database::Helper::p(const std::string & key, const std::string& value){
+SSL10n::Database::Helper& SSL10n::Database::Helper::v(const std::string & key, const std::string& value){
     if(storage->isValid){
         auto & elem = langMaps[key];
         elem.values[storage->forLang] = value;

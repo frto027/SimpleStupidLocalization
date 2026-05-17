@@ -62,7 +62,7 @@ namespace SSL10n {
         struct Helper{
             HelperStorage * storage;
             SSLOCAL_EXTERN Helper(Language lang = Language::L_English);
-            SSLOCAL_EXTERN Helper& p(const std::string & key, const std::string& value);
+            SSLOCAL_EXTERN Helper& v(const std::string & key, const std::string& value);
             SSLOCAL_EXTERN ~Helper();
         };
         
