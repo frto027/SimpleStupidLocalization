@@ -2,6 +2,14 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Launch Test program",
+            "program": "${workspaceFolder}/tests/test1.run",
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
             "name": "Launch Beat Saber",
             "type": "fb-lldb",
             "request": "launch",
