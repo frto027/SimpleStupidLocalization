@@ -12,8 +12,21 @@ All mods shares the same key pool, so prefix your key with something like your m
 
 # Usage
 
+WIP, not avaliable
+
+add this library to your `qpm.json` and rerun `qpm restore`
+
+```
+    {
+      "id": "sslocalization",
+      "versionRange": "^0.1.0",
+      "additionalData": {}
+    }
+```
+
 ```cpp
 #include "SSL10n.hpp"
+#include "SSL10n/GameKeys.hpp"
 
 void late_load(){
     // You need some way to tell the library about your key-values for each languages
@@ -23,11 +36,12 @@ void late_load(){
     SSL10n::Database::PolyglotFormat::AddCSVFile("/sdcard/your_mod_asset.csv");
     SSL10n::Database::PolyglotFormat::AddCSVContent(text, sizeof(text));
     /*
-        if you want add some key-value in your program
+        if you want add some key-value directly
     */
     SSL10n::Database::AddKeyValue("MYMOD_KEY", "en_value"); // for english
     SSL10n::Database::AddKeyValue("MYMOD_KEY", "sc_value", SSL10n::L_Simplified_Chinese);
     SSL10n::Database::Helper()
+        .p("MY_FORMAT_KEY", "answer is {}")
         .p("MYMOD_key1","en_value1")
         .p("MYMOD_key2","en_value2")
         .p("MYMOD_key3","en_value3");
@@ -40,8 +54,17 @@ void late_load(){
         to get the result of current language, just use SSL10n::Get
     */
     std::string result = SSL10n::Get("MYMOD_key1");
-    std::string result2 = SSL10n::FormatKey("MYMOD_KEYx", 1,2,3);
-    std::string result3 = SSL10n::FormatKeyWithDefault("MYMOD_KEYx", "the awnswer is {}", 42);
+    // see https://fmt.dev/ for more format details
+    std::string result2 = SSL10n::FormatKey("MY_FORMAT_KEY", 42);
+    // you can use a default fmt value to provide an IDE check
+    std::string result3 = SSL10n::FormatKeyWithDefault("MY_FORMAT_KEY", "the awnswer is {}", 42);
+
+    /*
+        to get the result of some game keys, use SSL10n::GameKeys.
+        this is for compile time check
+    */
+    std::string result_game_key = SSL10n::Get(SSL10n::GameKeys::LANGUAGE_THIS_EN);
+
     /* 
         You can update your UI when language changes.
         This is not required. The localize mod will tell players restart the game
@@ -54,9 +77,12 @@ void late_load(){
 }
 ```
 
-Use `qpm s build` to build
-Same goes for `qpm s copy` and `qpm s qmod`
+## Qmod build
 
+- build `qpm s build`
+- debug `qpm s copy`
+- release `qpm qmod zip`. no release, this is a library
+- local install, for develop `qpm install`
 ## Bump Guide
 
 - update qpm.json, qpm.shared.json

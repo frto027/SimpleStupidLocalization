@@ -54,5 +54,5 @@ for row in csv.reader(io.StringIO(polyglot_csv_text_bts.decode("utf8"))):
 
 output += GAME_KEYS_TAIL
 
-with open("shared/GameKeys.hpp","w", encoding="utf8") as f:
+with open("shared/SSL10n/GameKeys.hpp","w", encoding="utf8") as f:
     f.write(output)
