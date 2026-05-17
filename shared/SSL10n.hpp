@@ -80,15 +80,22 @@ namespace SSL10n {
     template <typename... T>
     std::string FormatKeyWithDefault(std::string key, fmt::format_string<T...> fmt, T&&... args){
         std::string r = Get(key);
-        try{
-            if(r == key){
-                return fmt::vformat(GetCurrentLocale(), fmt, fmt::make_format_args(args...));
-            }else{
+        if(r != key){
+            try{
                 return fmt::vformat(GetCurrentLocale(), r, fmt::make_format_args(args...));
+            }catch(...){
             }
-        }catch(...){
-            return Get(key);
         }
+
+        try{
+            return fmt::vformat(GetCurrentLocale(), fmt, fmt::make_format_args(args...));
+        }catch(...){
+        }
+
+        if(r != key){
+            return r;
+        }
+        return std::string(fmt.get().data(), fmt.get().size());
     }
     template <typename... T>
     std::string FormatKey(std::string key, T&&... args){
