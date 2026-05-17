@@ -56,7 +56,7 @@ void late_load(){
     std::string result = SSL10n::Get("MYMOD_key1");
     // see https://fmt.dev/ for more format details
     std::string result2 = SSL10n::FormatKey("MY_FORMAT_KEY", 42);
-    // you can use a default fmt value to provide an IDE check
+    // you can use a default fmt value to provide an IDE check and compile-time error detect
     std::string result3 = SSL10n::FormatKeyWithDefault("MY_FORMAT_KEY", "the awnswer is {}", 42);
 
     /*

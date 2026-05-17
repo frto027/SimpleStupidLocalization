@@ -1,11 +1,12 @@
 #include "main.hpp"
 
 #include "GameHooks.hpp"
-#include "SSL10n.hpp"
 #include "scotland2/shared/modloader.h"
 #include <fmt/base.h>
 #include <fmt/format.h>
-#include "GameKeys.hpp"
+
+#include "SSL10n.hpp"
+#include "SSL10n/GameKeys.hpp"
 
 static modloader::ModInfo modInfo{MOD_ID, VERSION, 0};
 // Stores the ID and version of our mod, and is sent to
@@ -26,7 +27,7 @@ MOD_EXTERN_FUNC void setup(CModInfo *info) noexcept {
   getConfig().Load();
   // File logging
   Paper::Logger::RegisterFileContextId(PaperLogger.tag);
-  SSL10n::FormatKeyWithDefault(SSL10n::GameKeys::CONTROLLER_PROFILES_BUTTON_COPY_FROM_RIGHT, "The answer is {} {}", 43);
+  SSL10n::FormatKeyWithDefault(SSL10n::GameKeys::CONTROLLER_PROFILES_BUTTON_COPY_FROM_RIGHT, "The answer is {}", 43);
   PaperLogger.info("Completed setup!");
 }
 
