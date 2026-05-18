@@ -5,8 +5,8 @@ import json
 PROJECT_ROOT = Path(__file__).parent.parent.parent
 
 def usage():
-    print("usage: python ./scripts/multibuild/apply.py <game version, e.g. 1.40.6>")
-
+    print("usage: qpm s time_machine <game version, e.g. 1.40.6>")
+    
 if not len(sys.argv) == 2:
     usage()
     exit(1)

@@ -38,6 +38,9 @@
       ],
       "tomb": [
         "pwsh ./scripts/pull-tombstone.ps1"
+      ],
+      "time_machine":[
+        "python ./scripts/time_machine/apply.py $0:?"
       ]
     },
     "qmodIncludeDirs": [
