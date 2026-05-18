@@ -15,6 +15,7 @@ add_compile_options(-frtti -fexceptions -fvisibility=hidden -fPIE -fPIC)
 # Include. Include order matters!
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/utils.cmake)
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/qpm.cmake)
+include(target.cmake)
 
 if(${CMAKE_BUILD_TYPE} STREQUAL "RELEASE" OR ${CMAKE_BUILD_TYPE} STREQUAL "RelWithDebInfo" OR ${CMAKE_BUILD_TYPE} STREQUAL "MinSizeRel")
         # Better optimizations
@@ -45,6 +46,8 @@ project( sslocalization
 
 add_compile_definitions(MOD_ID="${CMAKE_PROJECT_NAME}")
 add_compile_definitions(VERSION="${CMAKE_PROJECT_VERSION}")
+add_compile_definitions("GAME_VERSION_${TARGET_GAME_VERSION}")
+add_compile_definitions("GAME_VERSION=\"${TARGET_GAME_VERSION}\"")
 
 add_compile_definitions(SSLOCAL_MAIN_MOD)
 
@@ -68,6 +71,14 @@ target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE -llog)
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${INCLUDE_DIR})
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${SHARED_DIR})
 
+if(
+        (TARGET_GAME_VERSION STREQUAL "1_40_4") OR
+        (TARGET_GAME_VERSION STREQUAL "1_40_6") OR
+        (TARGET_GAME_VERSION STREQUAL "1_40_7") OR
+        (TARGET_GAME_VERSION STREQUAL "1_40_8") OR
+        (TARGET_GAME_VERSION STREQUAL "latest")
+)
+
 # beatsaber hook inline hook
 
 RECURSE_FILES(src_inline_hook_beatsaber_hook_local_extra_c ${EXTERN_DIR}/includes/beatsaber-hook/shared/inline-hook/*.c)
@@ -75,3 +86,5 @@ RECURSE_FILES(src_inline_hook_beatsaber_hook_local_extra_cpp ${EXTERN_DIR}/inclu
 
 target_sources(${COMPILE_ID} PRIVATE ${src_inline_hook_beatsaber_hook_local_extra_c})
 target_sources(${COMPILE_ID} PRIVATE ${src_inline_hook_beatsaber_hook_local_extra_cpp})
+
+endif()

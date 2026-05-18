@@ -1,0 +1,32 @@
+{
+  "workspace.qmodOutput": "sslocalization.1_42_0.qmod",
+  "dependencies": [
+    {
+      "id": "beatsaber-hook",
+      "versionRange": "^7.4.2",
+      "additionalData": {}
+    },
+    {
+      "id": "bs-cordl",
+      "versionRange": "^4200.0.0",
+      "additionalData": {}
+    },
+    {
+      "id": "scotland2",
+      "versionRange": "^0.1.7",
+      "additionalData": {
+        "includeQmod": false
+      }
+    },
+    {
+      "id": "paper2_scotland2",
+      "versionRange": "^4.7.0",
+      "additionalData": {}
+    }, 
+    {
+      "id": "fmt",
+      "versionRange": "^11.0.2",
+      "additionalData": {}
+    }
+  ]
+}
