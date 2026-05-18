@@ -5,8 +5,8 @@ remember to run `qpm restore` before test this.
 install deps in your machine
 
 ```bash
-dnf install libfmt-devel
-apt install libfmt-dev
+dnf install libfmt-devel # for fedora
+apt install libfmt-dev   # for ubuntu
 ```
 
 build and test

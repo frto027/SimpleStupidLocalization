@@ -6,11 +6,11 @@ for game BeatSaber.
 
 a **backend** library for Simple Stupid Localization
 
-it's not thread safe, only works in main thread.
+it's not thread safe, don't call this outside the unity thread.
 
 All mods shares the same key pool, so prefix your key with something like your mod id.
 
-# Usage
+# Usage for modder
 
 WIP, not avaliable
 
@@ -24,20 +24,21 @@ add this library to your `qpm.json` and rerun `qpm restore`
     }
 ```
 
+Usage. See `SSL10n.hpp` for more functions.
+
 ```cpp
 #include "SSL10n.hpp"
 #include "SSL10n/GameKeys.hpp"
 
 void late_load(){
     // You need some way to tell the library about your key-values for each languages
-    /*
-        if you want parse a csv file
-    */
+    // If you want parse a csv file, use `SSL10n::Database::PolyhglotFormat`
+    // Compat with polyglotunity's format. https://github.com/agens-no/PolyglotUnity
+    // Clone the [master sheet] of the following link and export csv file.
+    // https://docs.google.com/spreadsheets/d/17f0dQawb-s_Fd7DHgmVvJoEGDMH_yoSd8EYigrb0zmM/
     SSL10n::Database::PolyglotFormat::AddCSVFile("/sdcard/your_mod_asset.csv");
     SSL10n::Database::PolyglotFormat::AddCSVContent(text, sizeof(text));
-    /*
-        if you want add some key-value directly
-    */
+    // If you want add some key-value directly
     SSL10n::Database::AddKeyValue("MYMOD_KEY", "en_value"); // for english
     SSL10n::Database::AddKeyValue("MYMOD_KEY", "sc_value", SSL10n::L_Simplified_Chinese);
     SSL10n::Database::Helper()
@@ -50,18 +51,16 @@ void late_load(){
         .v("MYMOD_key2","sc_value2")
         .v("MYMOD_key3","sc_value3");
 
-    /* 
-        to get the result of current language, just use SSL10n::Get
-    */
+    // To get the result of current language, just use SSL10n::Get
     std::string result = SSL10n::Get("MYMOD_key1");
-    // see https://fmt.dev/ for more format details
+    // See https://fmt.dev/ for more format details
     std::string result2 = SSL10n::FormatKey("MY_FORMAT_KEY", 42);
-    // you can use a default fmt value to provide an IDE check and compile-time error detect
+    // You can use a default fmt value to provide an IDE check and compile-time error detect
     std::string result3 = SSL10n::FormatKeyWithDefault("MY_FORMAT_KEY", "the awnswer is {}", 42);
 
     /*
-        to get the result of some game keys, use SSL10n::GameKeys.
-        this is for compile time check
+        The mod also load csv files from the game's polyglot system, so you can access the game's i18n
+        texts. To get the result of some game keys, use the game keys directly or use SSL10n::GameKeys.
     */
     std::string result_game_key = SSL10n::Get(SSL10n::GameKeys::LANGUAGE_THIS_EN);
 
@@ -82,11 +81,26 @@ void late_load(){
 - debug `qpm s copy`
 - release `qpm qmod zip`. no release, this is a library
 - local install, for develop `qpm install`
+
 ## Bump Guide
 
 - update qpm.json, qpm.shared.json
 - update GameHooks.cpp if it broken (unlikely)
 - update GameKeys.hpp with `scripts/update_source.py`. after this, don't forget add a game version in the file manually.
+
+## Tests
+
+There's a test folder. In there you can compile an executable that uses the lib source without android ndk.
+
+## About the Language Controller Mod
+
+This library/mod doesn't have UI, and is configless, what it does is just follows game language.
+
+Another language controller mod can be made to control the mod language, or setup some preference like language fallback behaviors.
+
+Naturally works with [PolyglotInject](https://github.com/qe201020335/PolyglotInject).
+
+See namespace `SSL10n::LanguageController` in `SSL10n.hpp`
 
 ## Credits
 
