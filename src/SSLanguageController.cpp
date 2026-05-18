@@ -3,30 +3,25 @@
 
 bool followGameLanguage = true;
 
+namespace SSL10n {
+namespace LanguageController {
+namespace TraditionalChinese {
+static bool isPreferSimplified = true;
 
-namespace SSL10n{
-    namespace LanguageController {
-        namespace TraditionalChinese {
-            static bool isPreferSimplified = true;
+bool isPreferSimplifiedChinese() { return isPreferSimplified; }
+void setPreferSimplifiedChinese(bool v) { isPreferSimplified = v; }
+} // namespace TraditionalChinese
+} // namespace LanguageController
+} // namespace SSL10n
 
-            bool isPreferSimplifiedChinese(){
-                return isPreferSimplified;
-            }
-            void setPreferSimplifiedChinese(bool v){
-                isPreferSimplified = v;
-            }
-        }
-    }
-}
-
-void SSL10n::LanguageController::SetCurrentLanguage(Language nextLanguage){
-    if(nextLanguage == currentLanguage)
+void SSL10n::LanguageController::SetCurrentLanguage(Language nextLanguage) {
+    if (nextLanguage == currentLanguage)
         return;
-    if(nextLanguage >=0 && nextLanguage < SS_LANG_COUNT){
+    if (nextLanguage >= 0 && nextLanguage < SS_LANG_COUNT) {
         currentLanguage = nextLanguage;
         OnLanguageChangeCallback.invoke();
     }
 }
-void SSL10n::LanguageController::SetFollowGameLanguage(bool followGameLanguage){
+void SSL10n::LanguageController::SetFollowGameLanguage(bool followGameLanguage) {
     ::followGameLanguage = followGameLanguage;
 }

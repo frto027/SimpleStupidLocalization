@@ -4,7 +4,7 @@ WIP
 
 for game BeatSaber.
 
-a library for Simple Stupid Localization
+a **backend** library for Simple Stupid Localization
 
 it's not thread safe, only works in main thread.
 

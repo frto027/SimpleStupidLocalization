@@ -1,5 +1,7 @@
 #pragma once
 
+// clang-format off
+
 #include "beatsaber-hook/shared/utils/typedefs-wrappers.hpp"
 #include <fmt/base.h>
 #include <fmt/format.h>
