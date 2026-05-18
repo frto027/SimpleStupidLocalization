@@ -47,7 +47,7 @@
       "./build",
       "./extern/libs"
     ],
-    "qmodOutput": "sslocalization.1_40_8.qmod"
+    "qmodOutput": "sslocalization.qmod"
   },
   "dependencies": [
     {

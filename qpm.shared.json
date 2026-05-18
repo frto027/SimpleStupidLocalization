@@ -38,6 +38,9 @@
         "stack": [
           "pwsh ./scripts/ndk-stack.ps1"
         ],
+        "time_machine": [
+          "python ./scripts/time_machine/apply.py $0:?"
+        ],
         "tomb": [
           "pwsh ./scripts/pull-tombstone.ps1"
         ]
@@ -47,7 +50,7 @@
         "./extern/libs"
       ],
       "qmodIncludeFiles": [],
-      "qmodOutput": "./sslocalization.qmod"
+      "qmodOutput": "sslocalization.qmod"
     },
     "dependencies": [
       {

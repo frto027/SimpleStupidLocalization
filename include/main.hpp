@@ -12,8 +12,11 @@
 #include "beatsaber-hook/shared/utils/il2cpp-functions.hpp"
 #include "beatsaber-hook/shared/utils/logging.hpp"
 
-
+#if defined(GAME_VERSION_1_35_0) || defined(GAME_VERSION_1_37_0)
+#include "paper/shared/logger.hpp"
+#else
 #include "paper2_scotland2/shared/logger.hpp"
+#endif
 
 #include "_config.hpp"
 
