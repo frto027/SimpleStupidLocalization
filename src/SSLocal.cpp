@@ -7,54 +7,62 @@
 std::map<std::string, KeyStorage> langMaps;
 SSL10n::Language currentLanguage = SSL10n::L_English;
 
-SSL10n::Language fallbackLanguage(SSL10n::Language language){
-    switch (language) {
-        case SSL10n::L_Simplified_Chinese:
-            return  SSL10n::L_Traditional_Chinese;
-        default:
-            return SSL10n::L_English;
-    }
+std::string SSL10n::Get(const std::string& key, bool withFallback){
+    return GetOptional(key, withFallback).value_or(key);
+}
+    
+std::string SSL10n::Get(const std::string& key, Language forLang, bool withFallback){
+    return GetOptional(key, forLang, withFallback).value_or(key);
 }
 
-std::string SSL10n::Get(const std::string& key){
+std::optional<std::string> readFallback(SSL10n::Language lang, KeyStorage& storage){
+    #define TRY_RETURN(lang) if(storage.valueExists.test(SSL10n::lang)) return storage.values[SSL10n::lang];
+    switch(lang){
+        default:
+            TRY_RETURN(L_English)
+            return std::nullopt;
+        case SSL10n::L_Simplified_Chinese:
+            TRY_RETURN(L_Traditional_Chinese)
+            TRY_RETURN(L_English)
+            return std::nullopt;
+        case SSL10n::L_Traditional_Chinese:
+            if(SSL10n::LanguageController::TraditionalChinese::isPreferSimplifiedChinese())
+            {
+                TRY_RETURN(L_Simplified_Chinese)
+            }
+            TRY_RETURN(L_English)
+            return std::nullopt;
+    }
+    #undef TRY_RETURN
+}
+
+std::optional<std::string> SSL10n::GetOptional(const std::string& key, bool withFallback){
     auto it = langMaps.find(key);
     if(it == langMaps.end())[[unlikely]]{
-        return key;
+        return std::nullopt;
     }
     auto lang = currentLanguage;
     if(it->second.valueExists.test(lang))[[likely]]{
         return it->second.values[lang];
     }
-    while(true){
-        if(lang == L_English)
-            return key;
-        lang = fallbackLanguage(lang);
-        if(it->second.valueExists.test(lang))[[likely]]{
-            return it->second.values[lang];
-        }
+    if(withFallback)[[likely]]{
+        return readFallback(lang, it->second);
     }
+    return std::nullopt;
 }
-std::string SSL10n::Get(const std::string& key, Language forLang, bool withFallback){
+std::optional<std::string> SSL10n::GetOptional(const std::string& key, Language forLang, bool withFallback){
     if(forLang >=0 && forLang < SS_LANG_COUNT)[[likely]]{
         auto it = langMaps.find(key);
         if(it == langMaps.end())
-            [[unlikely]] return key;
+            [[unlikely]] return std::nullopt;
         if(it->second.valueExists.test(forLang))[[likely]]{
             return it->second.values[forLang];
         }
-        if(withFallback)[[unlikely]]{
-            while(true){
-                if(forLang == L_English)
-                    return key;
-                forLang = fallbackLanguage(forLang);
-                if(it->second.valueExists.test(forLang))[[likely]]
-                    return it->second.values[forLang];
-            }
+        if(withFallback)[[likely]]{
+            return readFallback(forLang, it->second);
         }
-        return key;
-
     }
-    return key;
+    return std::nullopt;
 }
 
 EventCallback<> SSL10n::OnLanguageChangeCallback;

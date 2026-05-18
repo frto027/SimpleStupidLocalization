@@ -5,6 +5,7 @@
 #include <fmt/format.h>
 #include <locale>
 #include <string>
+#include <optional>
 
 #ifdef SSLOCAL_MAIN_MOD
 #define SSLOCAL_EXTERN __attribute__((visibility("default")))
@@ -44,8 +45,10 @@ namespace SSL10n {
         L_Bosnian,
     };
 
-    SSLOCAL_EXTERN std::string Get(const std::string& key);
-    SSLOCAL_EXTERN std::string Get(const std::string& key, Language forLang, bool withFallback = false);
+    SSLOCAL_EXTERN std::string Get(const std::string& key, bool withFallback = true);
+    SSLOCAL_EXTERN std::string Get(const std::string& key, Language forLang, bool withFallback = true);
+    SSLOCAL_EXTERN std::optional<std::string> GetOptional(const std::string& key, bool withFallback = true);
+    SSLOCAL_EXTERN std::optional<std::string> GetOptional(const std::string& key, Language forLang, bool withFallback = true);
 
     extern SSLOCAL_EXTERN EventCallback<> OnLanguageChangeCallback;
 
@@ -72,6 +75,11 @@ namespace SSL10n {
         // these funcs should be called by language controller
         SSLOCAL_EXTERN void SetCurrentLanguage(Language nextLanguage);
         SSLOCAL_EXTERN void SetFollowGameLanguage(bool followGameLanguage);
+
+        namespace TraditionalChinese{
+            bool isPreferSimplifiedChinese();
+            void setPreferSimplifiedChinese(bool);
+        }
     }
 
     SSLOCAL_EXTERN const std::locale& GetCurrentLocale();
@@ -79,10 +87,10 @@ namespace SSL10n {
 
     template <typename... T>
     std::string FormatKeyWithDefault(std::string key, fmt::format_string<T...> fmt, T&&... args){
-        std::string r = Get(key);
-        if(r != key){
+        std::optional<std::string> r = GetOptional(key);
+        if(r.has_value()){
             try{
-                return fmt::vformat(GetCurrentLocale(), r, fmt::make_format_args(args...));
+                return fmt::vformat(GetCurrentLocale(), r.value(), fmt::make_format_args(args...));
             }catch(...){
             }
         }
@@ -92,8 +100,8 @@ namespace SSL10n {
         }catch(...){
         }
 
-        if(r != key){
-            return r;
+        if(r.has_value()){
+            return r.value();
         }
         return std::string(fmt.get().data(), fmt.get().size());
     }
