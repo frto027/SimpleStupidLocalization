@@ -3,7 +3,7 @@ import csv
 import io
 import re
 
-with open(r"AssetRipperExport\ExportedProject\Assets\Localization\Localization.csv", "rb") as f:
+with open(r"BSManager\BSInstances\1.41.1\AssetRipperExport\Assets\Localization\Localization.bytes", "rb") as f:
     polyglot_csv_text_bts = f.read()
 
 # polyglot_csv_text_bts = urllib.request.urlopen("https://raw.githubusercontent.com/qe201020335/PolyglotInject/refs/heads/master/assets/polyglot-inject.csv").read()
