@@ -115,7 +115,7 @@ There's a test folder. In there you can compile an executable that uses the lib 
 
 ## About the Language Controller Mod
 
-This library/mod doesn't have UI, and is configless, what it does is just follows game language.
+This library/mod doesn't have UI, what it does is just follows game language.
 
 Another language controller mod can be made to control the mod language, or setup some preference like language fallback behaviors.
 

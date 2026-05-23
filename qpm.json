@@ -1,7 +1,8 @@
 {
+  "$schema": "https://raw.githubusercontent.com/QuestPackageManager/QPM.Package/refs/heads/main/qpm.schema.json",
+  "version": "0.1.0",
   "sharedDir": "shared",
   "dependenciesDir": "extern",
-  "version": "0.1.0",
   "info": {
     "name": "sslocalization",
     "id": "sslocalization",
@@ -36,17 +37,18 @@
       "stack": [
         "pwsh ./scripts/ndk-stack.ps1"
       ],
+      "time_machine": [
+        "python ./scripts/time_machine/apply.py $0:?"
+      ],
       "tomb": [
         "pwsh ./scripts/pull-tombstone.ps1"
-      ],
-      "time_machine":[
-        "python ./scripts/time_machine/apply.py $0:?"
       ]
     },
     "qmodIncludeDirs": [
       "./build",
       "./extern/libs"
     ],
+    "qmodIncludeFiles": [],
     "qmodOutput": "sslocalization.qmod"
   },
   "dependencies": [
@@ -75,6 +77,11 @@
     {
       "id": "fmt",
       "versionRange": "^11.0.2",
+      "additionalData": {}
+    },
+    {
+      "id": "config-utils",
+      "versionRange": "^2.0.3",
       "additionalData": {}
     }
   ]

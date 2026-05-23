@@ -1,6 +1,6 @@
 #include "SSL10n.hpp"
 #include "SSLocalInternal.hpp"
-
+#include "modconfig.hpp"
 bool followGameLanguage = true;
 
 namespace SSL10n {
@@ -19,6 +19,9 @@ void SSL10n::LanguageController::SetCurrentLanguage(Language nextLanguage) {
         return;
     if (nextLanguage >= 0 && nextLanguage < SS_LANG_COUNT) {
         currentLanguage = nextLanguage;
+        if (getConfig().LastLanguage.GetValue() != nextLanguage) {
+            getConfig().LastLanguage.SetValue(nextLanguage);
+        }
         OnLanguageChangeCallback.invoke();
     }
 }
