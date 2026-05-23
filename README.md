@@ -31,6 +31,11 @@ Usage. See `SSL10n.hpp` for more functions.
 #include "SSL10n/GameKeys.hpp"
 
 void late_load(){
+
+    //////////////////////////////////////////////////////////////////
+    // ------------------ add your key-value database --------------//
+    //////////////////////////////////////////////////////////////////
+
     // You need some way to tell the library about your key-values for each languages
     // If you want parse a csv file, use `SSL10n::Database::PolyhglotFormat`
     // Compat with polyglotunity's format. https://github.com/agens-no/PolyglotUnity
@@ -51,22 +56,30 @@ void late_load(){
         .v("MYMOD_key2","sc_value2")
         .v("MYMOD_key3","sc_value3");
 
+    ///////////////////////////////////////////////////////////////
+    // ------------------- use key-values -----------------------//
+    ///////////////////////////////////////////////////////////////
+
     // To get the result of current language, just use SSL10n::Get
     std::string result = SSL10n::Get("MYMOD_key1");
     // See https://fmt.dev/ for more format details
     std::string result2 = SSL10n::FormatKey("MY_FORMAT_KEY", 42);
     // You can use a default fmt value to provide an IDE check and compile-time error detect
     std::string result3 = SSL10n::FormatKeyWithDefault("MY_FORMAT_KEY", "the awnswer is {}", 42);
-
     /*
         The mod also load csv files from the game's polyglot system, so you can access the game's i18n
         texts. To get the result of some game keys, use the game keys directly or use SSL10n::GameKeys.
     */
     std::string result_game_key = SSL10n::Get(SSL10n::GameKeys::LANGUAGE_THIS_EN);
 
+
+    //////////////////////////////////////////////////////////////
+    //------------------ handle language change ----------------//
+    //////////////////////////////////////////////////////////////
+    
     /* 
-        You can update your UI when language changes.
-        This is not required. You can handle the UI changes at anytime you want.
+        Not required.
+        The game re-creates most of UIs automatically when switch language.
     */
     SSL10n::OnLanguageChangeCallback.addCallback([](){
         std::string result = SSL10n::Get("MYMOD_key1");
