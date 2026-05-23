@@ -19,12 +19,12 @@ add this library to your `qpm.json` and rerun `qpm restore`
 ```
     {
       "id": "sslocalization",
-      "versionRange": "^0.1.0",
+      "versionRange": "^0.8.0",
       "additionalData": {}
     }
 ```
 
-Usage. See `SSL10n.hpp` for more functions.
+Usage. See [SSL10n.hpp](/shared/SSL10n.hpp) for more functions.
 
 ```cpp
 #include "SSL10n.hpp"
@@ -76,7 +76,7 @@ void late_load(){
     //////////////////////////////////////////////////////////////
     //------------------ handle language change ----------------//
     //////////////////////////////////////////////////////////////
-    
+
     /* 
         Not required.
         The game re-creates most of UIs automatically when switch language.
