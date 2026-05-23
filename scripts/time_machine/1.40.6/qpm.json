@@ -19,6 +19,11 @@
       }
     },
     {
+      "id": "config-utils",
+      "versionRange": "^2.0.3",
+      "additionalData": {}
+    },
+    {
       "id": "paper2_scotland2",
       "versionRange": "^4.6.4",
       "additionalData": {}
