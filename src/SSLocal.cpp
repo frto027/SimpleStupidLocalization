@@ -37,6 +37,9 @@ std::string SSL10n::Get(const std::string &key, bool withFallback) {
 std::string SSL10n::Get(const std::string &key, Language forLang, bool withFallback) {
     return GetOptional(key, forLang, withFallback).value_or(key);
 }
+std::string SSL10n::GetDefault(const std::string &key, const std::string &defaultValue, bool withFallback) {
+    return GetOptional(key, withFallback).value_or(defaultValue);
+}
 
 std::optional<std::string> SSL10n::GetOptional(const std::string &key, bool withFallback) {
     auto it = langMaps.find(key);

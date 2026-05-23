@@ -49,6 +49,7 @@ namespace SSL10n {
 
     SSLOCAL_EXTERN std::string Get(const std::string& key, bool withFallback = true);
     SSLOCAL_EXTERN std::string Get(const std::string& key, Language forLang, bool withFallback = true);
+    SSLOCAL_EXTERN std::string GetDefault(const std::string& key, const std::string& defaultValue, bool withFallback = true);
     SSLOCAL_EXTERN std::optional<std::string> GetOptional(const std::string& key, bool withFallback = true);
     SSLOCAL_EXTERN std::optional<std::string> GetOptional(const std::string& key, Language forLang, bool withFallback = true);
 
