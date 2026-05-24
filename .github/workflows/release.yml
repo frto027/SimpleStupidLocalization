@@ -1,4 +1,4 @@
-name: qmod_release
+name: Release
 
 on:
   workflow_dispatch:
@@ -23,13 +23,13 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         path: action_release
-        pattern: *.qmod
+        pattern: \*.qmod
         merge-multiple: true
     - name: Download debug symbol
       uses: actions/download-artifact@v4
       with:
         path: action_release
-        pattern: *.so
+        pattern: \*.so
         merge-multiple: false
     - name: Release
       uses: softprops/action-gh-release@v2
