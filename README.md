@@ -84,6 +84,8 @@ void late_load(){
 }
 ```
 
+See [csv.md](/docs/csv.md).
+
 ## Qmod build
 
 - build `qpm s build`

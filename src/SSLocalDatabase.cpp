@@ -85,6 +85,12 @@ void parse_csv(std::string_view str) {
     clock_gettime(CLOCK_MONOTONIC, &time_start);
 
     std::vector<std::vector<std::string>> lines;
+
+    // ignore BOM
+    if (str.size() >= 3 && str[0] == 0xFF && str[1] == 0xBB && str[2] == 0xBF) {
+        str = str.substr(3);
+    }
+
     while (str.size() > 0) {
         std::vector<std::string> line;
         while (str.size() > 0) {
