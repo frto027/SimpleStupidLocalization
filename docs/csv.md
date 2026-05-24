@@ -8,7 +8,42 @@ The mod is designed to be compat with polyglot's csv format, but not as strict a
 - We don't require more comma. e.g. you can write `MY_KEY,desc,english,,\r\n` instead of `MY_KEY,desc,english,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,\r\n`. But you need keep the language order.
 - Empty value will be ignored and be merged with old value if avaliable.
 - Description is ignored.
+- Everything in text is kept, including space.
 
 # Work with Microsoft Excel
 
 You can use `UTF-8 with BOM` encoding to tell excel your csv file is UTF-8 encoding. (UTF-8 with BOM is supported in version `>=0.x.1`)
+
+# Example
+
+This csv file can be parsed by the mod. It's not compatable with polyglot.
+
+simple example
+```
+polyglot,100
+MYMOD_KEY1,,eng1
+MYMOD_KEY2,,eng2
+MYMOD_KEY3,,eng3
+```
+complex example
+```
+↓this is meaning of each column
+LANGUAGE_THIS_EN,description,English,French,Spanish,German,Italian,Brazilian Portuguese,,Russian,,,Danish,,Swedish,Dutch,Polish,,Japanese,Simplified Chinese,Traditional Chinese,Korean,Czech,Hungarian,Română,Thai,,Hebrew,الإنجليزية,,Icelandic,Gaeilge,,,
+
+Save this to UTF-8 CRLF format (with BOM is okay)
+
+"anything before 'polyglot,100' is ignored"
+
+polyglot,100,
+
+MY_KEY1,desc of key1,english text,french text
+MY_KEY2,desc of key2, text(space included) ,french text(end with space) 
+MY_KEY3,desc of key3,"You can write text, with comma","Don't add space near quote"
+MY_KEY_WITH_MULTILINE,multiline text,"This is a multiline text,
+with comment,
+and ""quote"" is okay.
+","This is (not) a French multiline text,
+with comment
+and ""quote"" is okay.
+"
+```
