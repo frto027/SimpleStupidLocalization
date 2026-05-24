@@ -1,0 +1,39 @@
+name: qmod_release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    uses: ./.github/workflows/build-ndk.yml
+  release:
+    runs-on: ubuntu-latest
+    needs: build
+    permissions:
+      contents: write
+    steps:
+    - uses: actions/checkout@v4
+    - name: GetModVersion
+      id: modinfo
+      run: python .github/workflows/workflow_scripts/get_qpm_version.py > $GITHUB_OUTPUT
+    - name: Output mod info
+      run: |
+        echo mod version is ${{ steps.modinfo.outputs.version }}
+    - name: Download qmods
+      uses: actions/download-artifact@v4
+      with:
+        path: action_release
+        pattern: *.qmod
+        merge-multiple: true
+    - name: Download debug symbol
+      uses: actions/download-artifact@v4
+      with:
+        path: action_release
+        pattern: *.so
+        merge-multiple: false
+    - name: Release
+      uses: softprops/action-gh-release@v2
+      with:
+        draft: true
+        name: Release ${{ steps.modinfo.outputs.version }}
+        files: action_release/*
