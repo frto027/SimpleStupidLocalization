@@ -1,13 +1,13 @@
 {
   "$schema": "https://raw.githubusercontent.com/QuestPackageManager/QPM.Package/refs/heads/main/qpm.schema.json",
-  "version": "0.6.0",
+  "version": "0.1.0",
   "sharedDir": "shared",
   "dependenciesDir": "extern",
   "info": {
     "name": "sslocalization",
     "id": "sslocalization",
     "version": "0.6.0",
-    "url": null,
+    "url": "https://github.com/frto027/SimpleStupidLocalization",
     "additionalData": {
       "overrideSoName": "libsslocalization.so",
       "cmake": true
