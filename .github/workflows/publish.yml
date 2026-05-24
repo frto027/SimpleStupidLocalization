@@ -1,0 +1,35 @@
+name: Publish QPM Package
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      name: Checkout
+      with:
+        submodules: true
+        lfs: true
+
+    - name: Get Tag Version
+      id: get_tag_version
+      run: |
+        echo ${GITHUB_REF#refs/tags/}
+        echo "TAG=${GITHUB_REF#refs/tags/}" >> ${GITHUB_OUTPUT}
+        echo "VERSION=${GITHUB_REF#refs/tags/v}" >> ${GITHUB_OUTPUT}
+
+    - name: Get QPM
+      uses: Fernthedev/qpm-action@v1
+      with:
+        workflow_token: ${{ secrets.GITHUB_TOKEN }}
+        restore: true
+        cache: false
+        publish: "now"
+        publish_token: "${{ secrets.QPM_KEY }}"
+        version: ${{ steps.get_tag_version.outputs.VERSION }}
+        tag: ${{ steps.get_tag_version.outputs.TAG }}
