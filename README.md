@@ -15,7 +15,7 @@ add this library to your `qpm.json` and rerun `qpm restore`
 ```
     {
       "id": "sslocalization",
-      "versionRange": "^0.6.0",
+      "versionRange": "0.6.*",
       "additionalData": {}
     }
 ```
@@ -111,14 +111,14 @@ The mod focus on the latest moddable game version, but will make it avaliable fo
 
 Mod Version | Game Version
 :---:|:---:
-0.1.x|1.35.0
-0.2.x|1.37.0
-0.3.x|1.40.4
-0.4.x|1.40.6
-0.5.x|1.40.7
-0.6.x|1.40.8
-0.7.x|1.41.0
-0.8.x|1.42.0
+`0.1.*`|`1.35.0`
+`0.2.*`|`1.37.0`
+`0.3.*`|`1.40.4`
+`0.4.*`|`1.40.6`
+`0.5.*`|`1.40.7`
+`0.6.*`|`1.40.8`
+`0.7.*`|`1.41.0`
+`0.8.*`|`1.42.0`
 
 ## Tests
 
