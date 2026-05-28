@@ -106,7 +106,7 @@ void parse_csv(std::string_view str) {
     bool got_first_line = false;
     for (auto &line : lines) {
         if (!got_first_line) {
-            if (line.size() > 2 && line[0] == "Polyglot" && line[1] == "100") {
+            if (line.size() >= 1 && (line[0] == "Polyglot" || line[0] == "PolyMaster" || line[0] == "BEGIN") ) {
                 got_first_line = true;
             }
             continue;
