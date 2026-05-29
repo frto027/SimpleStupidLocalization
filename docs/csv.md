@@ -19,6 +19,8 @@ You can use `UTF-8 with BOM` encoding to tell excel your csv file is UTF-8 encod
 
 These csv file can be parsed by the mod. Be aware that they're not compatable with polyglot.
 
+You can always use the [Polyglot's sheet](https://docs.google.com/spreadsheets/d/17f0dQawb-s_Fd7DHgmVvJoEGDMH_yoSd8EYigrb0zmM/) if you want.
+
 simple example
 ```
 Polyglot
