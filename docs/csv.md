@@ -4,23 +4,23 @@ The mod is designed to be compat with polyglot's csv format, but not as strict a
 
 - **Only** works with CRLF(`\r\n`), `\n` is seen as a normal character.
 - Use UTF-8 encoding. The mod doesn't touch your texts' encoding. The file encoding depends on your usage. For Unity, they use UTF-8.
-- All lines before `polyglot,100` will be ignored. You can add comments before that.
-- We don't require more comma. e.g. you can write `MY_KEY,desc,english,,\r\n` instead of `MY_KEY,desc,english,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,\r\n`. But you need keep the language order.
+- All lines before `Polyglot,` will be ignored. You can add comments before that.
+- We don't require more comma, for convenience. e.g. you can write `MY_KEY,desc,english,,\r\n` instead of `MY_KEY,desc,english,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,\r\n`. But you need keep the language order.
 - Empty value will be ignored and be merged with old value if avaliable.
 - Description is ignored.
 - Everything in text is kept, including space.
 
 # Work with Microsoft Excel
 
-You can use `UTF-8 with BOM` encoding to tell excel your csv file is UTF-8 encoding. (UTF-8 with BOM is supported in version `>=0.x.1`)
+You can use `UTF-8 with BOM` encoding to tell excel your csv file is UTF-8 encoding. (UTF-8 with BOM is supported in library version `>=0.x.1`)
 
 # Example
 
-This csv file can be parsed by the mod. It's not compatable with polyglot.
+These csv file can be parsed by the mod. Be aware that they're not compatable with polyglot.
 
 simple example
 ```
-polyglot,100
+Polyglot
 MYMOD_KEY1,,eng1
 MYMOD_KEY2,,eng2
 MYMOD_KEY3,,eng3
@@ -32,9 +32,9 @@ LANGUAGE_THIS_EN,description,English,French,Spanish,German,Italian,Brazilian Por
 
 Save this to UTF-8 CRLF format (with BOM is okay)
 
-"anything before 'polyglot,100' is ignored"
+"anything before 'Polyglot,' is ignored"
 
-polyglot,100,
+Polyglot,,
 
 MY_KEY1,desc of key1,english text,french text
 MY_KEY2,desc of key2, text(space included) ,french text(end with space) 
