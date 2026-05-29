@@ -2,12 +2,13 @@
 
 The mod is designed to be compat with polyglot's csv format, but not as strict as polyglot's requirement.
 
-- **Only** works with CRLF(`\r\n`), `\n` is seen as a normal character.
-- Use UTF-8 encoding. The mod doesn't touch your texts' encoding. The file encoding depends on your usage. For Unity, they use UTF-8.
-- All lines before `Polyglot,` will be ignored. You can add comments before that.
+- All lines before `Polyglot,` will be ignored. You can add comments before that. This line is required, just like polyglot.
+- first column is key, seconed column is description, third column is value, others are optional different languages.
 - We don't require more comma, for convenience. e.g. you can write `MY_KEY,desc,english,,\r\n` instead of `MY_KEY,desc,english,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,\r\n`. But you need keep the language order.
 - Empty value will be ignored and be merged with old value if avaliable.
-- Description is ignored.
+- Description is ignored. However translators can see the description, so add one if possible.
+- **Only** works with CRLF(`\r\n`), `\n` is seen as a normal character.
+- Use UTF-8 encoding. The mod doesn't touch your texts' encoding. The file encoding depends on your usage. For Unity, they use UTF-8.
 - Everything in text is kept, including space.
 
 # Work with Microsoft Excel
