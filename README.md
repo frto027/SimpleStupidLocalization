@@ -130,6 +130,8 @@ This library/mod doesn't have UI, what it does is just follows game language.
 
 Another language controller mod can be made to control the mod language, or setup some preference like language fallback behaviors.
 
+Designed to be work with [Loqolizer](https://github.com/BeatSaberCN/Loqolizer/tree/master).
+
 Naturally works with [PolyglotInject](https://github.com/qe201020335/PolyglotInject).
 
 See namespace `SSL10n::LanguageController` in `SSL10n.hpp`
