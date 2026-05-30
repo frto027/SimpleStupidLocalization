@@ -1,6 +1,6 @@
 # SSL10n
 
-for game BeatSaber.
+for game BeatSaber. This is for modder. For other part, refer to [this](https://github.com/frto027/ssl10n.csv/tree/master).
 
 a **backend** library for Simple Stupid Localization
 
@@ -8,7 +8,7 @@ it's not thread safe, don't call this outside the unity thread.
 
 All mods shares the same key pool, so prefix your key with something like your mod id.
 
-# Usage for modder
+# Usage
 
 add this library to your `qpm.json` and rerun `qpm restore`
 
