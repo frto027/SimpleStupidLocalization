@@ -1,5 +1,6 @@
 #include "SSL10n.hpp"
 #include "SSLocalInternal.hpp"
+#include "main.hpp"
 #include "modconfig.hpp"
 bool followGameLanguage = true;
 
@@ -15,6 +16,9 @@ void setPreferSimplifiedChinese(bool v) { isPreferSimplified = v; }
 } // namespace SSL10n
 
 void SSL10n::LanguageController::SetCurrentLanguage(Language nextLanguage) {
+    PaperLogger.info("Set language to {}, will print caller.", (int)nextLanguage);
+    PaperLogger.Backtrace(3);
+
     if (nextLanguage == currentLanguage)
         return;
     if (nextLanguage >= 0 && nextLanguage < SS_LANG_COUNT) {
@@ -26,5 +30,7 @@ void SSL10n::LanguageController::SetCurrentLanguage(Language nextLanguage) {
     }
 }
 void SSL10n::LanguageController::SetFollowGameLanguage(bool followGameLanguage) {
+    PaperLogger.info("Set follow game language to {}. will print caller.", followGameLanguage);
+    PaperLogger.Backtrace(3);
     ::followGameLanguage = followGameLanguage;
 }

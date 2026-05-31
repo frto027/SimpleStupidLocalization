@@ -49,6 +49,8 @@ MAKE_HOOK_MATCH(Localization_SetSelectLang, &BGLib::Polyglot::LocalizationModel:
         if (SyncPolyglotLanguageFromPolyglot(self)) {
             PaperLogger.info("Language has been updated to {}.", (int)SSL10n::GetCurrentLanguage());
         }
+    } else {
+        PaperLogger.info("Not follow game language");
     }
 }
 
