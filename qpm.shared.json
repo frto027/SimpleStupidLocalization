@@ -7,8 +7,8 @@
     "info": {
       "name": "sslocalization",
       "id": "sslocalization",
-      "version": "0.6.1",
-      "url": null,
+      "version": "0.6.2",
+      "url": "https://github.com/frto027/SimpleStupidLocalization",
       "additionalData": {
         "overrideSoName": "libsslocalization.so",
         "cmake": true
