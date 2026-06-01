@@ -41,6 +41,14 @@ bool parse_csv_cell(std::string_view &remains, std::vector<std::string> &output)
                             return true;
                         }
                     }
+                    remains = remains.substr(i + 2);
+                    output.emplace_back(ss.str());
+                    return true;
+                }
+                if (remains[i + 1] == '\n') {
+                    remains = remains.substr(i + 2);
+                    output.emplace_back(ss.str());
+                    return true;
                 }
                 ss << remains[i + 1];
                 i++;
