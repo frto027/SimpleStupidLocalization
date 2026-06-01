@@ -91,7 +91,6 @@ See [csv.md](/docs/csv.md).
 - build `qpm s build`
 - debug `qpm s copy`
 - release `qpm qmod zip`. no release, this is a library
-- local install, for develop `qpm install`
 
 ## Bump Guide
 
