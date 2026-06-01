@@ -7,7 +7,7 @@
     "info": {
       "name": "sslocalization",
       "id": "sslocalization",
-      "version": "0.6.2",
+      "version": "0.6.3",
       "url": "https://github.com/frto027/SimpleStupidLocalization",
       "additionalData": {
         "overrideSoName": "libsslocalization.so",
