@@ -55,8 +55,7 @@ bool parse_csv_cell(std::string_view &remains, std::vector<std::string> &output)
     } else {
         int end_pos;
         for (end_pos = 0; end_pos < remains.size(); end_pos++) {
-            if (remains[end_pos] == ',' ||
-                (remains[end_pos] == '\r' && remains.size() > end_pos + 1 && remains[end_pos + 1] == '\n')) {
+            if (remains[end_pos] == ',' || remains[end_pos] == '\r' || remains[end_pos] == '\n') {
                 break;
             }
         }
@@ -70,11 +69,21 @@ bool parse_csv_cell(std::string_view &remains, std::vector<std::string> &output)
             remains = remains.substr(end_pos + 1);
             return false;
         }
-        if (remains[end_pos] == '\r' && remains.size() > end_pos + 1 && remains[end_pos + 1] == '\n') {
+        if (remains[end_pos] == '\r') {
             output.emplace_back(remains.substr(0, end_pos));
-            remains = remains.substr(end_pos + 2);
+            if (remains.size() > end_pos + 1 && remains[end_pos] == '\n') {
+                remains = remains.substr(end_pos + 2);
+            } else {
+                remains = remains.substr(end_pos + 1);
+            }
             return true;
         }
+        if (remains[end_pos] == '\n') {
+            output.emplace_back(remains.substr(0, end_pos));
+            remains = remains.substr(end_pos + 1);
+            return true;
+        }
+
         safeAbort(__FUNCTION__, __FILE__, __LINE__);
     }
 }
@@ -110,6 +119,7 @@ void parse_csv(std::string_view str) {
                 (line[0] == "polyglot" || line[0] == "Polyglot" || line[0] == "PolyMaster" || line[0] == "BEGIN")) {
                 got_first_line = true;
             }
+            PaperLogger.info("Ignore line because didn't find start mark : {}", line);
             continue;
         }
 

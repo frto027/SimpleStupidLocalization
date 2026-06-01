@@ -7,7 +7,7 @@ The mod is designed to be compat with polyglot's csv format, but not as strict a
 - We don't require more comma, for convenience. e.g. you can write `MY_KEY,desc,english,,\r\n` instead of `MY_KEY,desc,english,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,\r\n`. But you need keep the language order.
 - Empty value will be ignored and be merged with old value if avaliable. **Space is not empty value**.
 - Description is ignored. However translators can see the description, so add one if possible.
-- **Only** works with CRLF(`\r\n`), `\n` is seen as a normal character.
+- works with CRLF(`\r\n`), or LF(`\n`)
 - Use UTF-8 encoding. The mod doesn't touch your texts' encoding. The file encoding depends on your usage. For Unity, they use UTF-8.
 - Everything in text is kept, including space.
 
