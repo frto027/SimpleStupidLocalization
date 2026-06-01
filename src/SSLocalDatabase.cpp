@@ -87,7 +87,7 @@ void parse_csv(std::string_view str) {
     std::vector<std::vector<std::string>> lines;
 
     // ignore BOM
-    if (str.size() >= 3 && str[0] == 0xFF && str[1] == 0xBB && str[2] == 0xBF) {
+    if (str.size() >= 3 && str[0] == 0xEF && str[1] == 0xBB && str[2] == 0xBF) {
         str = str.substr(3);
     }
 
@@ -106,7 +106,8 @@ void parse_csv(std::string_view str) {
     bool got_first_line = false;
     for (auto &line : lines) {
         if (!got_first_line) {
-            if (line.size() >= 1 && (line[0] == "Polyglot" || line[0] == "PolyMaster" || line[0] == "BEGIN") ) {
+            if (line.size() >= 1 &&
+                (line[0] == "polyglot" || line[0] == "Polyglot" || line[0] == "PolyMaster" || line[0] == "BEGIN")) {
                 got_first_line = true;
             }
             continue;
@@ -131,6 +132,7 @@ void parse_csv(std::string_view str) {
     long long elapsed_ns =
         (time_end.tv_sec - time_start.tv_sec) * 1000000000LL + (time_end.tv_nsec - time_start.tv_nsec);
     PaperLogger.info("Parsed polyglot csv file, file size= {} bytes, parse time= {} ns", file_size, elapsed_ns);
+    PaperLogger.info("We have {} entries", langMaps.size());
 }
 } // namespace PolyglotFormat
 } // namespace Database
