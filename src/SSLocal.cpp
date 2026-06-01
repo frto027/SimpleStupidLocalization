@@ -75,44 +75,46 @@ EventCallback<> SSL10n::OnLanguageChangeCallback;
 SSL10n::Language SSL10n::GetCurrentLanguage() { return currentLanguage; }
 
 const std::locale &SSL10n::GetCurrentLocale() { return GetLanguageLocale(currentLanguage); }
-const std::locale &SSL10n::GetLanguageLocale(Language lang) {
+const std::locale &SSL10n::GetLanguageLocale(Language) {
     static std::locale en_US("en_US.UTF-8");
-    static std::locale locale_English("en_US.UTF-8");
-    static std::locale locale_French("fr_FR.UTF-8");
-    static std::locale locale_Spanish("es_ES.UTF-8");
-    static std::locale locale_German("de_DE.UTF-8");
-    static std::locale locale_Italian("it_IT.UTF-8");
-    static std::locale locale_Portuguese_Brazil("pt_BR.UTF-8");
-    static std::locale locale_Portuguese("pt_PT.UTF-8");
-    static std::locale locale_Russian("ru_RU.UTF-8");
-    static std::locale locale_Greek("el_GR.UTF-8");
-    static std::locale locale_Turkish("tr_TR.UTF-8");
-    static std::locale locale_Danish("da_DK.UTF-8");
-    static std::locale locale_Norwegian("nb_NO.UTF-8");
-    static std::locale locale_Swedish("sv_SE.UTF-8");
-    static std::locale locale_Dutch("nl_NL.UTF-8");
-    static std::locale locale_Polish("pl_PL.UTF-8");
-    static std::locale locale_Finnish("fi_FI.UTF-8");
-    static std::locale locale_Japanese("ja_JP.UTF-8");
-    static std::locale locale_Simplified_Chinese("zh_CN.UTF-8");
-    static std::locale locale_Traditional_Chinese("zh_HK.UTF-8");
-    static std::locale locale_Korean("ko_KR.UTF-8");
-    static std::locale locale_Czech("cs_CZ.UTF-8");
-    static std::locale locale_Hungarian("hu_HU.UTF-8");
-    static std::locale locale_Romanian("ro_RO.UTF-8");
-    static std::locale locale_Thai("th_TH.UTF-8");
-    static std::locale locale_Bulgarian("bg_BG.UTF-8");
-    static std::locale locale_Hebrew("he_IL.UTF-8");
-    static std::locale locale_Arabic("ar_AE.UTF-8");
-    static std::locale locale_Bosnian("bs_BA.UTF-8");
+    return en_US;
+    // some of these locale is not avaliable on quest device, we just use en_US for now.
+    //     static std::locale locale_English("en_US.UTF-8");
+    //     static std::locale locale_French("fr_FR.UTF-8");
+    //     static std::locale locale_Spanish("es_ES.UTF-8");
+    //     static std::locale locale_German("de_DE.UTF-8");
+    //     static std::locale locale_Italian("it_IT.UTF-8");
+    //     static std::locale locale_Portuguese_Brazil("pt_BR.UTF-8");
+    //     static std::locale locale_Portuguese("pt_PT.UTF-8");
+    //     static std::locale locale_Russian("ru_RU.UTF-8");
+    //     static std::locale locale_Greek("el_GR.UTF-8");
+    //     static std::locale locale_Turkish("tr_TR.UTF-8");
+    //     static std::locale locale_Danish("da_DK.UTF-8");
+    //     static std::locale locale_Norwegian("nb_NO.UTF-8");
+    //     static std::locale locale_Swedish("sv_SE.UTF-8");
+    //     static std::locale locale_Dutch("nl_NL.UTF-8");
+    //     static std::locale locale_Polish("pl_PL.UTF-8");
+    //     static std::locale locale_Finnish("fi_FI.UTF-8");
+    //     static std::locale locale_Japanese("ja_JP.UTF-8");
+    //     static std::locale locale_Simplified_Chinese("zh_CN.UTF-8");
+    //     static std::locale locale_Traditional_Chinese("zh_HK.UTF-8");
+    //     static std::locale locale_Korean("ko_KR.UTF-8");
+    //     static std::locale locale_Czech("cs_CZ.UTF-8");
+    //     static std::locale locale_Hungarian("hu_HU.UTF-8");
+    //     static std::locale locale_Romanian("ro_RO.UTF-8");
+    //     static std::locale locale_Thai("th_TH.UTF-8");
+    //     static std::locale locale_Bulgarian("bg_BG.UTF-8");
+    //     static std::locale locale_Hebrew("he_IL.UTF-8");
+    //     static std::locale locale_Arabic("ar_AE.UTF-8");
+    //     static std::locale locale_Bosnian("bs_BA.UTF-8");
 
-    switch (lang) {
-    default:
-        return en_US;
-#define CASE(x)                                                                                                        \
-    case Language::L_##x:                                                                                              \
-        return locale_##x;
-        FOR_EACH_LANGUAGES(CASE)
-#undef CASE
-    }
+    //     switch (lang) {
+    //     default:
+    //         return en_US;
+    // #define CASE(x) \
+//     case Language::L_##x: \
+//         return locale_##x;
+    //         FOR_EACH_LANGUAGES(CASE)
+    // #undef CASE
+    //     }
 }
