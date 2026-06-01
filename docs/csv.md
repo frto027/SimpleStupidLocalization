@@ -11,6 +11,8 @@ The mod is designed to be compat with polyglot's csv format, but not as strict a
 - Use UTF-8 encoding. The mod doesn't touch your texts' encoding. The file encoding depends on your usage. For Unity, they use UTF-8.
 - Everything in text is kept, including space.
 
+- [SSL10n.csv](https://github.com/frto027/ssl10n.csv) needs a perfect csv file(e.g. the comma count) so you can save your file with excel before you commit it.
+
 # Work with Microsoft Excel
 
 You can use `UTF-8 with BOM` encoding to tell excel your csv file is UTF-8 encoding. (UTF-8 with BOM is supported in library version `>=0.x.1`)
