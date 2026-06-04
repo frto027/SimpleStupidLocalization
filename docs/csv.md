@@ -14,7 +14,7 @@ The mod is designed to be compat with polyglot's csv format, but not as strict a
 
 # Work with Microsoft Excel
 
-In some windows system, excel doesn't use UTF8 encoding. 
+In some windows system, excel doesn't use UTF8 encoding by default. 
 
 Always save the file with `UTF-8 with BOM` to prevent encoding problem with microsoft's product. Both `ssl10n.csv` and `sslocalization` has BOM support.
 
