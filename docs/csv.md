@@ -5,7 +5,7 @@ The mod is designed to be compat with polyglot's csv format, but not as strict a
 - All rows before `Polyglot,` are paresed but be ignored. You can add comments before that. The `Polyglot,` line is required, just like what polyglot requires.
 - first column is key, seconed column is description, third column is value, others are optional different languages.
 - We don't require the colmn count, you need at least 3 column. But make sure every line have same column count, so `ssl10n.csv` can synchronize it to crowdin. This mod doesn't require it. **You can just save your csv file with MSExcel.**
-- Empty value will be ignored and be merged with old value if avaliable. **Space is not empty value**.
+- When a key is loaded twice, the empty value will be ignored and be merged with old value if avaliable. **Space is not empty value**.
 - Description is ignored. However translators can see the description, so add one if possible.
 - works with CRLF(`\r\n`), or LF(`\n`)
 - Use UTF-8 encoding. The mod doesn't touch your texts' encoding. The file encoding depends on your usage. For Unity, they use UTF-8.
