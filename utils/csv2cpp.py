@@ -54,10 +54,11 @@ def handle_csv(filepath:str):
                 padding_1 = max(0, 80 - len(str_part_1)) * ' '
                 header_strs.append("            %s%s{%s}" %(str_part_1, padding_1, str_part_2))
 
-                str_part_3 = f'template <typename... Args> std::string {to_c_var_name(row[0])}(Args... format_args)'
-                str_part_4 = f'return SSL10n::FormatKeyWithDefault("{escape_c_str(row[0])}", "{escape_c_str(row[2])}", format_args...);'
-                padding_2 = max(0, 120 - len(str_part_3)) * ' '
-                header_fmts.append("            %s%s{%s}" %(str_part_3, padding_2, str_part_4))
+                if '{' in row[2]:
+                    str_part_3 = f'template <typename... Args> std::string {to_c_var_name(row[0])}(Args... format_args)'
+                    str_part_4 = f'return SSL10n::FormatKeyWithDefault("{escape_c_str(row[0])}", "{escape_c_str(row[2])}", format_args...);'
+                    padding_2 = max(0, 120 - len(str_part_3)) * ' '
+                    header_fmts.append("            %s%s{%s}" %(str_part_3, padding_2, str_part_4))
 for f in sys.argv[3:]:
     handle_csv(f)
 
