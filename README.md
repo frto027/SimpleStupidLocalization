@@ -29,7 +29,7 @@ LANGUAGE_EN,description,English,French,Spanish,German,Italian,Portuguese (Brazil
 Polyglot,(don't delete this line),(anything before this line will be parsed as csv but ignored),,,,,,,,,,,,,,,,,,,,,,,,,,,
 ```
 
-add this to your `CMakeLists.txt`
+add this to your `CMakeLists.txt`, this convert the csv file to cpp source at build time so you can load and use them directly in source file.
 
 ```cmake
 include(${EXTERN_DIR}/includes/sslocalization/shared/utils/csv2hpp.cmake)
