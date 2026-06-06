@@ -22,7 +22,7 @@ add this library to your `qpm.json` and rerun `qpm restore`
 
 WIP
 
-add a `localize.csv` in your mod. The first two line could be (see [csv.md](/docs/csv.md) for more):
+add a `localize.csv` in your mod with the following content, add more keys in this file. (see [csv.md](/docs/csv.md) for more details):
 
 ```csv
 LANGUAGE_EN,description,English,French,Spanish,German,Italian,Portuguese (Brazil),Portuguese,Russian,Greek,Turkish,Danish,Norwegian,Swedish,Dutch,Polish,Finnish,Japanese,Simplified Chinese,Traditional Chinese,Korean,Czech,Hungarian,Romanian,Thai,Bulgarian,Hebrew,Arabic,Bosnian
@@ -37,14 +37,16 @@ include(${EXTERN_DIR}/includes/sslocalization/shared/utils/csv2hpp.cmake)
 ssl10n_csv_2_hpp(${COMPILE_ID} ${CMAKE_CURRENT_BINARY_DIR}/SSL10nGenerated SSL10nGenerated.hpp "${CMAKE_CURRENT_SOURCE_DIR}/localize.csv")
 ```
 
-and add this in your mod
+and use this in your mod
 
 ```cpp
 #include "SSL10nGenerated.hpp"
 
 void late_load(){
     SSL10nGen::LoadCsv();
+}
 
+void somewhere_else(){
     std::string str1 = SSL10nGen::STR::YOUR_STR();
 
     // See https://fmt.dev/ for more format details
