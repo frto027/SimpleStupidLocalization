@@ -8,17 +8,55 @@ it's not thread safe, don't call this outside the unity thread.
 
 All mods shares the same key pool, so prefix your key with something like your mod id.
 
-# Usage
-
 add this library to your `qpm.json` and rerun `qpm restore`
 
-```
+```json
     {
       "id": "sslocalization",
       "versionRange": "^0.6.3",
       "additionalData": {}
     }
 ```
+
+# Usage(with csv file)
+
+WIP
+
+add a `localize.csv` in your mod. The first two line could be (see [csv.md](/docs/csv.md) for more):
+
+```csv
+LANGUAGE_EN,description,English,French,Spanish,German,Italian,Portuguese (Brazil),Portuguese,Russian,Greek,Turkish,Danish,Norwegian,Swedish,Dutch,Polish,Finnish,Japanese,Simplified Chinese,Traditional Chinese,Korean,Czech,Hungarian,Romanian,Thai,Bulgarian,Hebrew,Arabic,Bosnian
+Polyglot,(don't delete this line),(anything before this line will be parsed as csv but ignored),,,,,,,,,,,,,,,,,,,,,,,,,,,
+```
+
+add this to your `CMakeLists.txt`
+
+```cmake
+include(${EXTERN_DIR}/includes/sslocalization/shared/utils/csv2hpp.cmake)
+# argument: projectname, generated_build_folder, include_header_name, your_csv_file_path1, your_csv_file_path2, your_csv_file_path3, ...
+ssl10n_csv_2_hpp(${COMPILE_ID} ${CMAKE_CURRENT_BINARY_DIR}/SSL10nGenerated SSL10nGenerated.hpp "${CMAKE_CURRENT_SOURCE_DIR}/localize.csv")
+```
+
+and add this in your mod
+
+```cpp
+#include "SSL10nGenerated.hpp"
+
+void late_load(){
+    SSL10nGen::LoadCsv();
+
+    std::string str1 = SSL10nGen::STR::YOUR_STR();
+
+    // See https://fmt.dev/ for more format details
+    std::string formatted_str = SSL10nGen::FMT::YOUR_FORMAT_STR("format arg1", "format arg2");
+}
+
+```
+
+Don't forget make a pull request to [ssl10n.csv](https://github.com/frto027/ssl10n.csv) so your mod will be avaliable in the crowdin project!
+
+# Usage(details, with api)
+
 
 Usage. See [SSL10n.hpp](/shared/SSL10n.hpp) for more functions.
 

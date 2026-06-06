@@ -52,5 +52,5 @@ VERSION_GAME_KEY = VERSION_FOLDER / "GameKeys.hpp"
 if VERSION_GAME_KEY.exists():
     print(f"copy GameKeys.hpp")
     with VERSION_GAME_KEY.open("rb") as fread:
-        with (PROJECT_ROOT / 'shared' / 'SSL10n' / 'GameKeys.hpp').open("wb") as fwrite:
+        with (PROJECT_ROOT / 'shared' / 'include' / 'SSL10n' / 'GameKeys.hpp').open("wb") as fwrite:
             fwrite.write(fread.read())

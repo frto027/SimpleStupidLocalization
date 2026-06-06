@@ -69,7 +69,7 @@ add_library(
 target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE -llog)
 
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${INCLUDE_DIR})
-target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${SHARED_DIR})
+target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${SHARED_DIR}/include)
 
 if(
         (TARGET_GAME_VERSION STREQUAL "1_35_0") OR
