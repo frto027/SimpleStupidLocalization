@@ -13,10 +13,22 @@ add this library to your `qpm.json` and rerun `qpm restore`
 ```json
     {
       "id": "sslocalization",
-      "versionRange": "^0.6.3",
+      "versionRange": "^0.6.0",
       "additionalData": {}
     }
 ```
+
+Mod Version | Game Version
+:---:|:---:
+`^0.1.0`|`1.35.0`
+`^0.2.0`|`1.37.0`
+`^0.3.0`|`1.40.4`
+`^0.4.0`|`1.40.6`
+`^0.5.0`|`1.40.7`
+`^0.6.0`|`1.40.8`
+`^0.7.0`|`1.41.0`
+`^0.8.0`|`1.42.0`
+
 
 # Usage(with csv file)
 
@@ -147,18 +159,6 @@ qpm s time_machine 1.40.6
 The `time_machine` script generate old version qpm manifests. Do NOT git commit the result of `time_machine` into master branch. Python required.
 
 The mod focus on the latest moddable game version, but will make it avaliable for old/future game versions when needed.
-
-Mod Version | Game Version
-:---:|:---:
-`^0.1.0`|`1.35.0`
-`^0.2.0`|`1.37.0`
-`^0.3.0`|`1.40.4`
-`^0.4.0`|`1.40.6`
-`^0.5.0`|`1.40.7`
-`^0.6.0`|`1.40.8`
-`^0.7.0`|`1.41.0`
-`^0.8.0`|`1.42.0`
-
 ## Tests
 
 There's a test folder. In there you can compile an executable that uses the lib source without android ndk.
