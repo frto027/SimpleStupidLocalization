@@ -20,6 +20,11 @@ Always save the file with `UTF-8 with BOM` to prevent encoding problem with micr
 
 # Example
 
+> [!TIP]
+> These example can be loaded by sslocalization library, **BUT** not compat with `ssl10n.csv` community translate project.<br/>
+> To be compat, make sure your csv is standard csv. You can edit csv with MS Excel.
+
+
 These csv file can be parsed by the mod. Be aware that they're not compatable with polyglot.
 
 You can always use the [Polyglot's sheet](https://docs.google.com/spreadsheets/d/17f0dQawb-s_Fd7DHgmVvJoEGDMH_yoSd8EYigrb0zmM/) if you want.
