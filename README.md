@@ -46,7 +46,7 @@ add this to your `CMakeLists.txt`, this convert the csv file to cpp source at bu
 ```cmake
 include(${EXTERN_DIR}/includes/sslocalization/shared/utils/csv2hpp.cmake)
 # argument: projectname, generated_build_folder, include_header_name, your_csv_file_path1, your_csv_file_path2, your_csv_file_path3, ...
-ssl10n_csv_2_hpp(${COMPILE_ID} ${CMAKE_CURRENT_BINARY_DIR}/SSL10nGenerated SSL10nGenerated.hpp "${CMAKE_CURRENT_SOURCE_DIR}/localize.csv")
+ssl10n_csv2hpp(${COMPILE_ID} ${CMAKE_CURRENT_BINARY_DIR}/SSL10nGenerated SSL10nGenerated.hpp "${CMAKE_CURRENT_SOURCE_DIR}/localize.csv")
 ```
 
 and use this in your mod
