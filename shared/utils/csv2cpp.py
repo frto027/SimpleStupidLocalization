@@ -36,6 +36,7 @@ def handle_csv(filepath:str):
 
     encoding = 'utf8'
 
+    key_start = None
     with open(filepath,'rb') as f:
         bts = f.read()
         bts_str = ','.join([str(x) for x in bts])
@@ -52,16 +53,26 @@ def handle_csv(filepath:str):
                     row[0] == "polyglot" or row[0] == "Polyglot" or row[0] == "BEGIN"
                 ):
                     start = True
+                
+                for col in row:
+                    if col.startswith("csv2hpp_config_key_start="):
+                        key_start = col[len("csv2hpp_config_key_start="):]
                 continue
             if len(row) >= 3:
-                str_part_1 = f"inline std::string {to_c_var_name(row[0])}()"
-                str_part_2 = f'return SSL10n::Get("{escape_c_str(row[0])}");'
+                key_str = row[0]
+                key_var_name_str = key_str
+                if key_start != None:
+                    assert key_str.startswith(key_start), f"key {key_str} should start with {key_start} in {filepath}"
+                    key_var_name_str = key_var_name_str[len(key_start):]
+
+                str_part_1 = f"inline std::string {to_c_var_name(key_var_name_str)}()"
+                str_part_2 = f'return SSL10n::Get("{escape_c_str(key_str)}");'
                 padding_1 = max(0, 80 - len(str_part_1)) * ' '
                 header_strs.append("            %s%s{%s}" %(str_part_1, padding_1, str_part_2))
 
                 if '{' in row[2]:
-                    str_part_3 = f'template <typename... Args> std::string {to_c_var_name(row[0])}(Args... format_args)'
-                    str_part_4 = f'return SSL10n::FormatKeyWithDefault("{escape_c_str(row[0])}", "{escape_c_str(row[2])}", format_args...);'
+                    str_part_3 = f'template <typename... Args> std::string {to_c_var_name(key_var_name_str)}(Args... format_args)'
+                    str_part_4 = f'return SSL10n::FormatKeyWithDefault("{escape_c_str(key_str)}", "{escape_c_str(row[2])}", format_args...);'
                     padding_2 = max(0, 120 - len(str_part_3)) * ' '
                     header_fmts.append("            %s%s{%s}" %(str_part_3, padding_2, str_part_4))
 for f in sys.argv[3:]:
