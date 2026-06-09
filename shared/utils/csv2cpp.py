@@ -33,13 +33,18 @@ def to_c_var_name(str:str):
 
 def handle_csv(filepath:str):
     global next_csv_id
+
+    encoding = 'utf8'
+
     with open(filepath,'rb') as f:
         bts = f.read()
         bts_str = ','.join([str(x) for x in bts])
         body_csv_res.append(f"static const uint8_t res_{next_csv_id}[{len(bts)}]={'{'}{bts_str}{'}'};")
         body_loadcsv.append(f'    SSL10n::Database::PolyglotFormat::AddCSVContent((const char *)res_{next_csv_id},sizeof(res_{next_csv_id}));')
         next_csv_id += 1
-    with open(filepath,'r', encoding='utf8') as f:
+        if len(bts) > 3 and bts[0] == 0xEF and bts[1] == 0xBB and bts[2] == 0xBF:
+            encoding='utf-8-sig'
+    with open(filepath,'r', encoding=encoding) as f:
         start = False
         for row in csv.reader(f):
             if not start:
