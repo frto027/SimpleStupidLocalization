@@ -30,11 +30,12 @@ Mod Version | Game Version
 `^0.8.0`|`1.42.0`
 
 
-# Usage(with csv file)
+# Usage(basic, with csv file)
 
-WIP
+add a `localize.csv` in your mod with the following content, add more keys in this file. (see [csv.md](/docs/csv.md) for more details, [mod example](https://github.com/BeatSaberCN/Loqolizer/blob/master/localize.csv)):
 
-add a `localize.csv` in your mod with the following content, add more keys in this file. (see [csv.md](/docs/csv.md) for more details):
+> [!TIP]
+> you see the csv in example mod has a raw `csv2hpp_config_key_start=LOQOLIZER_`. It's optional but tells the csv2hpp script check and remove prefix in generated function names.
 
 ```csv
 LANGUAGE_EN,description,English,French,Spanish,German,Italian,Portuguese (Brazil),Portuguese,Russian,Greek,Turkish,Danish,Norwegian,Swedish,Dutch,Polish,Finnish,Japanese,Simplified Chinese,Traditional Chinese,Korean,Czech,Hungarian,Romanian,Thai,Bulgarian,Hebrew,Arabic,Bosnian
@@ -69,10 +70,11 @@ void somewhere_else(){
 
 Don't forget make a pull request to [ssl10n.csv](https://github.com/frto027/ssl10n.csv) so your mod will be avaliable in the crowdin project!
 
-# Usage(details, with api)
+# Usage(advanced, with api)
 
+You need handle csv asset manually in this way.
 
-Usage. See [SSL10n.hpp](/shared/SSL10n.hpp) for more functions.
+See [SSL10n.hpp](/shared/include/SSL10n.hpp) for more api.
 
 ```cpp
 #include "SSL10n.hpp"
