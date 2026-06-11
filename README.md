@@ -198,6 +198,14 @@ But don't forget that `ssl10n.csv` need your csv file to feed the crowdin projec
 
 Of cource we can let `ssl10n.csv` read your json. Let me know your json format if you really like json format.
 
+**Related project?**
+
+**sslocalization** This library, avaliable in qpm package. Provide a key-value pool for all mods.
+
+**ssl10n.csv** Collect `csv` files from every mods. Send them to a crowdin project. Generate a website that provide translated texts.
+
+**Loqolizer** Load translated texts to the game.
+
 ## Credits
 
 * [zoller27osu](https://github.com/zoller27osu), [Sc2ad](https://github.com/Sc2ad) and [jakibaki](https://github.com/jakibaki) - [beatsaber-hook](https://github.com/sc2ad/beatsaber-hook)
