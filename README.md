@@ -188,11 +188,11 @@ We don't have a standard json format for translate. The csv format encorage you 
 
 This is a python script that help you convert csv file to source code. With this script you don't need handle the csv assets by your self.
 
-This script is not required, if your mod already have asset support and want load your csv by your self. No need change your `CMakeLists.txt`.
+This script is not required, if your mod already have asset support and want load your csv by your self. No need change your `CMakeLists.txt`. See advanced usage for csv file loading.
 
 **Can I use other format like `json`?**
 
-Yes, you can load any keys in your mods. So you can read your json file by your self and load them.
+Yes, you can load any keys in your mods. So you can read your json file by your self and load them. See advanced usage for key values loading.
 
 But don't forget that `ssl10n.csv` need your csv file to feed the crowdin project, so the translators are able to translate your mods.
 
