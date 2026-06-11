@@ -176,6 +176,27 @@ Designed to be work with [Loqolizer](https://github.com/BeatSaberCN/Loqolizer/tr
 Naturally works with [PolyglotInject](https://github.com/qe201020335/PolyglotInject).
 
 See namespace `SSL10n::LanguageController` in `SSL10n.hpp`
+## Q&A
+
+**Why use `csv` to store key values?**
+
+Not only key-values, but also key **descriptions** for translator. We use Polyglot's csv format because it's simple and stupid. 
+
+We don't have a standard json format for translate. The csv format encorage you write descriptions for your keys.
+
+**What's `csv2hpp`? Should I use it?**
+
+This is a python script that help you convert csv file to source code. With this script you don't need handle the csv assets by your self.
+
+This script is not required, if your mod already have asset support and want load your csv by your self. No need change your `CMakeLists.txt`.
+
+**Can I use other format like `json`?**
+
+Yes, you can load any keys in your mods. So you can read your json file by your self and load them.
+
+But don't forget that `ssl10n.csv` need your csv file to feed the crowdin project, so the translators are able to translate your mods.
+
+Of cource we can let `ssl10n.csv` read your json. Let me know your json format if you really like json format.
 
 ## Credits
 
