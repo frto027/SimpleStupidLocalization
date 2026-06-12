@@ -35,7 +35,7 @@ Mod Version | Game Version
 add a `localize.csv` in your mod with the following content, add more keys in this file. (see [csv.md](/docs/csv.md) for more details, [mod example](https://github.com/BeatSaberCN/Loqolizer/blob/master/localize.csv)):
 
 > [!TIP]
-> you see the csv in example mod has a raw `csv2hpp_config_key_start=LOQOLIZER_`. It's optional but tells the csv2hpp script check and remove prefix in generated function names.
+> you see the csv in example mod has a row `csv2hpp_config_key_start=LOQOLIZER_`. It's optional but tells the csv2hpp script check and remove prefix in generated function names.
 
 ```csv
 LANGUAGE_EN,description,English,French,Spanish,German,Italian,Portuguese (Brazil),Portuguese,Russian,Greek,Turkish,Danish,Norwegian,Swedish,Dutch,Polish,Finnish,Japanese,Simplified Chinese,Traditional Chinese,Korean,Czech,Hungarian,Romanian,Thai,Bulgarian,Hebrew,Arabic,Bosnian
