@@ -6,7 +6,7 @@
   "info": {
     "name": "sslocalization",
     "id": "sslocalization",
-    "version": "0.6.4",
+    "version": "0.6.5",
     "url": "https://github.com/frto027/SimpleStupidLocalization",
     "additionalData": {
       "compileOptions":{
