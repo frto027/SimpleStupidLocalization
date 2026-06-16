@@ -127,7 +127,7 @@ void parse_csv(std::string_view str) {
                 (line[0] == "polyglot" || line[0] == "Polyglot" || line[0] == "PolyMaster" || line[0] == "BEGIN")) {
                 got_first_line = true;
             }
-            PaperLogger.info("Ignore line because didn't find start mark : {}", line);
+            // PaperLogger.info("Ignore line because didn't find start mark : {}", line);
             continue;
         }
 
