@@ -13,7 +13,7 @@ add this library to your `qpm.json` and rerun `qpm restore`
 ```json
     {
       "id": "sslocalization",
-      "versionRange": "^0.6.0",
+      "versionRange": "^0.6.5",
       "additionalData": {}
     }
 ```
