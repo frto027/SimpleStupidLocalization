@@ -3,6 +3,7 @@
 #include "beatsaber-hook/shared/utils/utils-functions.h"
 #include "main.hpp"
 #include <ctime>
+#include <list>
 #include <mutex>
 #include <sstream>
 #include <string>
@@ -225,3 +226,18 @@ SSL10n::Database::Helper &SSL10n::Database::Helper::v(const std::string &key, co
     return *this;
 }
 SSL10n::Database::Helper::~Helper() { delete storage; }
+
+void LoadBuiltinDatabase() {
+    std::list<std::pair<const char *, const char *>> builtin_db = {
+#include "GameKeys.inl"
+    };
+    std::lock_guard<std::mutex> guard(ssl_mutex);
+
+    for (auto &pair : builtin_db) {
+        auto &storage = langMaps[pair.first];
+        if (!storage.valueExists.test(SSL10n::L_English)) {
+            storage.values[SSL10n::L_English] = pair.second;
+            storage.valueExists.set(SSL10n::L_English);
+        }
+    }
+}

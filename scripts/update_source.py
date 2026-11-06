@@ -34,6 +34,8 @@ GAME_KEYS_TAIL = '''
 
 output = GAME_KEYS_HEADER
 
+output_db = ""
+
 for row in csv.reader(io.StringIO(polyglot_csv_text_bts.decode("utf8"))):
     if not header_found:
         if row[0] == "Polyglot":
@@ -55,7 +57,11 @@ for row in csv.reader(io.StringIO(polyglot_csv_text_bts.decode("utf8"))):
     key_align = " " * (60-len(key))
     output += f'        inline const char * {c_keyname}{c_key_align}="{key}"; {key_align}// "{en_text_comment}"\n'
 
+    output_db += ' {"%s","%s"},\n' % (key, en_text_comment)
+
 output += GAME_KEYS_TAIL
 
 with open("shared/include/SSL10n/GameKeys.hpp","w", encoding="utf8") as f:
     f.write(output)
+with open("include/GameKeys.inl", "w", encoding="utf8") as f:
+    f.write(output_db)

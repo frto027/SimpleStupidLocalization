@@ -1,5 +1,6 @@
 #include "main.hpp"
 
+#include "SSLocalInternal.hpp"
 #include "scotland2/shared/modloader.h"
 #include <fmt/base.h>
 #include <fmt/format.h>
@@ -14,6 +15,8 @@ MOD_EXTERN_FUNC void setup(CModInfo *info) noexcept {
 
     // File logging
     Paper::Logger::RegisterFileContextId(PaperLogger.tag);
+
+    LoadBuiltinDatabase();
 
     PaperLogger.info("Completed setup!");
 }

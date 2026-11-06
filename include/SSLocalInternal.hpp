@@ -46,3 +46,5 @@ extern SSL10n::Language currentLanguage;
     CASE(Hebrew)                                                                                                       \
     CASE(Arabic)                                                                                                       \
     CASE(Bosnian)
+
+void LoadBuiltinDatabase();
