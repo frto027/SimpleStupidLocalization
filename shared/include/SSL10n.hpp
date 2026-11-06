@@ -58,6 +58,10 @@ namespace SSL10n {
     SSLOCAL_EXTERN Language GetCurrentLanguage();
 
     namespace Database {
+        /*
+            Any mods can add key-valued to the databse.
+            LanguageController will load comminuty translate texts, make sure your mods are registered under `ssl10n.csv` project.
+        */
         namespace PolyglotFormat{
             SSLOCAL_EXTERN void AddCSVFile(const std::string& path);
             SSLOCAL_EXTERN void AddCSVContent(const char * text, int size);
@@ -77,21 +81,14 @@ namespace SSL10n {
     }
 
     namespace LanguageController {
-        // these funcs should be called by language controller
+        /*
+            LanguageController functions should be called by a localization mod, e.g. Loqolizer.
+            If they're not installed, the ssl10n library still works at a fallback mode.
+            This design makes the library works without require any game version related behaivor.
+
+            Without the Loqolizer mod, all mods will stay in english.
+        */
         SSLOCAL_EXTERN void SetCurrentLanguage(Language nextLanguage);
-
-        // these behavior should be executed by language controller from game callbacks
-        // if they're not called, the mod still works at a fallback mode.
-        // this design can make the library not game version related.
-        namespace GameCallbacks{
-            /*
-                The Loqolizer mod will:
-                call SSL10n::Database::PolyglotFormat::AddCSVContent at hooksite BGLib::Polyglot::CsvReader::Parse
-                call SSL10n::LanguageController::SetCurrentLanguage at BGLib::Polyglot::LocalizationModel::set_SelectedLanguage
-
-                without the Loqolizer mod, all mods will stay in english.
-            */
-        }
 
         namespace TraditionalChinese{
             SSLOCAL_EXTERN bool isPreferSimplifiedChinese();
