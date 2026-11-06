@@ -1,6 +1,7 @@
 #pragma once
 
 #include <bitset>
+#include <mutex>
 #include <string>
 #include <map>
 #include "SSL10n.hpp"
@@ -12,6 +13,7 @@ struct KeyStorage {
     std::string values[SS_LANG_COUNT];
 };
 
+extern std::mutex ssl_mutex;
 extern std::map<std::string, KeyStorage> langMaps;
 extern SSL10n::Language currentLanguage;
 

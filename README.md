@@ -4,8 +4,6 @@ for game BeatSaber. This is for modder. For other part, refer to [this](https://
 
 a **backend** library for Simple Stupid Localization
 
-it's not thread safe, don't call this outside the unity thread.
-
 All mods shares the same key pool, so prefix your key with something like your mod id.
 
 add this library to your `qpm.json` and rerun `qpm restore`
@@ -152,15 +150,6 @@ See [csv.md](/docs/csv.md).
 - update GameHooks.cpp if it broken (unlikely)
 - update GameKeys.hpp with `scripts/update_source.py`. after this, don't forget add a game version in the file manually.
 
-## Time Machine / Build for old games
-
-```sh
-qpm s time_machine 1.40.6
-```
-
-The `time_machine` script generate old version qpm manifests. Do NOT git commit the result of `time_machine` into master branch. Python required.
-
-The mod focus on the latest moddable game version, but will make it avaliable for old/future game versions when needed.
 ## Tests
 
 There's a test folder. In there you can compile an executable that uses the lib source without android ndk.

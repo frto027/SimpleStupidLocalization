@@ -2,6 +2,7 @@
 #include "SSLocalInternal.hpp"
 
 #include <locale>
+#include <mutex>
 #include <utility>
 
 std::map<std::string, KeyStorage> langMaps;
@@ -30,6 +31,8 @@ std::optional<std::string> readFallback(SSL10n::Language lang, KeyStorage &stora
 #undef TRY_RETURN
 }
 
+std::mutex ssl_mutex;
+
 std::string SSL10n::Get(const std::string &key, bool withFallback) {
     return GetOptional(key, withFallback).value_or(key);
 }
@@ -42,6 +45,8 @@ std::string SSL10n::GetDefault(const std::string &key, const std::string &defaul
 }
 
 std::optional<std::string> SSL10n::GetOptional(const std::string &key, bool withFallback) {
+    std::lock_guard<std::mutex> guard(ssl_mutex);
+
     auto it = langMaps.find(key);
     if (it == langMaps.end()) [[unlikely]] {
         return std::nullopt;
@@ -57,6 +62,8 @@ std::optional<std::string> SSL10n::GetOptional(const std::string &key, bool with
 }
 std::optional<std::string> SSL10n::GetOptional(const std::string &key, Language forLang, bool withFallback) {
     if (forLang >= 0 && forLang < SS_LANG_COUNT) [[likely]] {
+        std::lock_guard<std::mutex> guard(ssl_mutex);
+
         auto it = langMaps.find(key);
         if (it == langMaps.end()) [[unlikely]]
             return std::nullopt;
@@ -112,8 +119,8 @@ const std::locale &SSL10n::GetLanguageLocale(Language) {
     //     default:
     //         return en_US;
     // #define CASE(x) \
-//     case Language::L_##x: \
-//         return locale_##x;
+    //     case Language::L_##x: \
+    //         return locale_##x;
     //         FOR_EACH_LANGUAGES(CASE)
     // #undef CASE
     //     }

@@ -3,6 +3,7 @@
 #include "beatsaber-hook/shared/utils/utils-functions.h"
 #include "main.hpp"
 #include <ctime>
+#include <mutex>
 #include <sstream>
 #include <string>
 #include <string_view>
@@ -79,7 +80,7 @@ bool parse_csv_cell(std::string_view &remains, std::vector<std::string> &output)
         }
         if (remains[end_pos] == '\r') {
             output.emplace_back(remains.substr(0, end_pos));
-            if (remains.size() > end_pos + 1 && remains[end_pos] == '\n') {
+            if (remains.size() > end_pos + 1 && remains[end_pos + 1] == '\n') {
                 remains = remains.substr(end_pos + 2);
             } else {
                 remains = remains.substr(end_pos + 1);
@@ -120,32 +121,36 @@ void parse_csv(std::string_view str) {
             lines.emplace_back(std::move(line));
         }
     }
-    bool got_first_line = false;
-    for (auto &line : lines) {
-        if (!got_first_line) {
-            if (line.size() >= 1 &&
-                (line[0] == "polyglot" || line[0] == "Polyglot" || line[0] == "PolyMaster" || line[0] == "BEGIN")) {
-                got_first_line = true;
-            }
-            // PaperLogger.info("Ignore line because didn't find start mark : {}", line);
-            continue;
-        }
 
-        if (line.size() < 1)
-            continue;
-        std::string key = line[0];
-        auto &keyStorage = langMaps[key];
-        for (int i = 2; i < line.size(); i++) {
-            int lang = i - 2;
-            if (lang < L_English || lang > L_Bosnian)
-                break;
-            if (line[i].size() == 0)
+    {
+        std::lock_guard<std::mutex> guard(ssl_mutex);
+
+        bool got_first_line = false;
+        for (auto &line : lines) {
+            if (!got_first_line) {
+                if (line.size() >= 1 &&
+                    (line[0] == "polyglot" || line[0] == "Polyglot" || line[0] == "PolyMaster" || line[0] == "BEGIN")) {
+                    got_first_line = true;
+                }
+                // PaperLogger.info("Ignore line because didn't find start mark : {}", line);
                 continue;
-            keyStorage.values[lang] = line[i];
-            keyStorage.valueExists.set(lang);
+            }
+
+            if (line.size() < 1)
+                continue;
+            std::string key = line[0];
+            auto &keyStorage = langMaps[key];
+            for (int i = 2; i < line.size(); i++) {
+                int lang = i - 2;
+                if (lang < L_English || lang > L_Bosnian)
+                    break;
+                if (line[i].size() == 0)
+                    continue;
+                keyStorage.values[lang] = line[i];
+                keyStorage.valueExists.set(lang);
+            }
         }
     }
-
     clock_gettime(CLOCK_MONOTONIC, &time_end);
     long long elapsed_ns =
         (time_end.tv_sec - time_start.tv_sec) * 1000000000LL + (time_end.tv_nsec - time_start.tv_nsec);
@@ -183,6 +188,8 @@ void SSL10n::Database::PolyglotFormat::AddCSVContent(const char *text, int size)
 
 void SSL10n::Database::AddKeyValue(const std::string &key, const std::string &value, Language forLanguage) {
     if (forLanguage >= 0 && forLanguage < SS_LANG_COUNT) {
+        std::lock_guard<std::mutex> guard(ssl_mutex);
+
         auto &elem = langMaps[key];
         elem.values[forLanguage] = value;
         elem.valueExists.set(forLanguage);
@@ -210,6 +217,7 @@ SSL10n::Database::Helper::Helper(Language lang) { storage = new HelperStorage(la
 
 SSL10n::Database::Helper &SSL10n::Database::Helper::v(const std::string &key, const std::string &value) {
     if (storage->isValid) {
+        std::lock_guard<std::mutex> guard(ssl_mutex);
         auto &elem = langMaps[key];
         elem.values[storage->forLang] = value;
         elem.valueExists.set(storage->forLang);

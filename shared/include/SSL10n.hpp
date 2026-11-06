@@ -70,6 +70,8 @@ namespace SSL10n {
             SSLOCAL_EXTERN Helper(Language lang = Language::L_English);
             SSLOCAL_EXTERN Helper& v(const std::string & key, const std::string& value);
             SSLOCAL_EXTERN ~Helper();
+            Helper(const Helper&) = delete;
+            Helper& operator=(const Helper&) = delete;
         };
         
     }
@@ -92,8 +94,8 @@ namespace SSL10n {
         }
 
         namespace TraditionalChinese{
-            bool isPreferSimplifiedChinese();
-            void setPreferSimplifiedChinese(bool);
+            SSLOCAL_EXTERN bool isPreferSimplifiedChinese();
+            SSLOCAL_EXTERN void setPreferSimplifiedChinese(bool);
         }
     }
 

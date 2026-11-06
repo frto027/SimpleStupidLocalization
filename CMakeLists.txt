@@ -19,6 +19,7 @@ add_compile_options(-frtti -fexceptions -fvisibility=hidden -fvisibility-inlines
 # Expose definitions from qpm_defines.cmake
 add_compile_definitions(VERSION="${MOD_VERSION}")
 add_compile_definitions(MOD_ID="${MOD_ID}")
+add_compile_definitions(SSLOCAL_MAIN_MOD)
 
 # Add any extra definitions from the build script
 get_cmake_property(variable_names VARIABLES)
