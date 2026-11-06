@@ -2,7 +2,7 @@
 
 // clang-format off
 
-#include "beatsaber-hook/shared/utils/typedefs-wrappers.hpp"
+#include "beatsaber-hook/shared/callback.hpp"
 #include <fmt/base.h>
 #include <fmt/format.h>
 #include <locale>
@@ -53,7 +53,7 @@ namespace SSL10n {
     SSLOCAL_EXTERN std::optional<std::string> GetOptional(const std::string& key, bool withFallback = true);
     SSLOCAL_EXTERN std::optional<std::string> GetOptional(const std::string& key, Language forLang, bool withFallback = true);
 
-    extern SSLOCAL_EXTERN EventCallback<> OnLanguageChangeCallback;
+    extern SSLOCAL_EXTERN event_callback<> OnLanguageChangeCallback;
 
     SSLOCAL_EXTERN Language GetCurrentLanguage();
 

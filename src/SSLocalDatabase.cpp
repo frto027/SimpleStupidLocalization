@@ -1,6 +1,6 @@
 #include "SSL10n.hpp"
 #include "SSLocalInternal.hpp"
-#include "beatsaber-hook/shared/utils/utils-functions.h"
+#include "beatsaber-hook/shared/utils.hpp"
 #include "main.hpp"
 #include <ctime>
 #include <list>
@@ -94,7 +94,7 @@ bool parse_csv_cell(std::string_view &remains, std::vector<std::string> &output)
             return true;
         }
 
-        safeAbort(__FUNCTION__, __FILE__, __LINE__);
+        SAFE_ABORT();
     }
 }
 void parse_csv(std::string_view str) {

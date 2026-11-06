@@ -4,7 +4,7 @@
     "name": "${mod_name}",
     "id": "${mod_id}",
     "author": "frto027",
-    "version": "0.7.0",
+    "version": "0.8.0",
     "packageId": "com.beatgames.beatsaber",
     "description": "a localization library that Keep It Simple Stupid",
     "dependencies": [],

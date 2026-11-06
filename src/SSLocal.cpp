@@ -77,7 +77,7 @@ std::optional<std::string> SSL10n::GetOptional(const std::string &key, Language 
     return std::nullopt;
 }
 
-EventCallback<> SSL10n::OnLanguageChangeCallback;
+event_callback<> SSL10n::OnLanguageChangeCallback;
 
 SSL10n::Language SSL10n::GetCurrentLanguage() { return currentLanguage; }
 
