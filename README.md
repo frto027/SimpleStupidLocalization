@@ -132,15 +132,9 @@ See [csv.md](/docs/csv.md).
 - debug `qpm s copy`
 - release `qpm qmod zip`. no release, this is a library
 
-## Bump Guide
-
-- update qpm.json, qpm.shared.json
-- update GameHooks.cpp if it broken (unlikely)
-- update GameKeys.hpp with `scripts/update_source.py`. after this, don't forget add a game version in the file manually.
-
 ## Tests
 
-There's a test folder. In there you can compile an executable that uses the lib source without android ndk.
+There's a test folder, maybe outdated sometimes. In there you can compile an executable that uses the lib source without android ndk.
 
 ## About the Language Controller Mod
 
