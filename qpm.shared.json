@@ -40,6 +40,7 @@
           "python3 ./extern/includes/mod-scripts/shared/restart.py $0:?"
         ]
       },
+      "ndk": "^27.3.13750724",
       "qmodIncludeDirs": [
         "./build",
         "./extern/libs"
@@ -79,11 +80,6 @@
         "id": "fmt",
         "versionRange": "^11.0.2",
         "additionalData": {}
-      },
-      {
-        "id": "config-utils",
-        "versionRange": "^2.0.3",
-        "additionalData": {}
       }
     ]
   },
@@ -100,18 +96,6 @@
         }
       },
       "version": "0.1.7"
-    },
-    {
-      "dependency": {
-        "id": "rapidjson-macros",
-        "versionRange": "=2.1.0",
-        "additionalData": {
-          "headersOnly": true,
-          "branchName": "version/v2_1_0",
-          "cmake": false
-        }
-      },
-      "version": "2.1.0"
     },
     {
       "dependency": {
@@ -155,20 +139,6 @@
         }
       },
       "version": "4.8.0"
-    },
-    {
-      "dependency": {
-        "id": "config-utils",
-        "versionRange": "=2.0.3",
-        "additionalData": {
-          "headersOnly": true,
-          "soLink": "https://github.com/darknight1050/config-utils/releases/download/v2.0.3/libconfig-utils_test.so",
-          "overrideSoName": "libconfig-utils_test.so",
-          "branchName": "version/v2_0_3",
-          "cmake": true
-        }
-      },
-      "version": "2.0.3"
     },
     {
       "dependency": {

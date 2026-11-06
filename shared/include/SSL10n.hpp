@@ -77,7 +77,19 @@ namespace SSL10n {
     namespace LanguageController {
         // these funcs should be called by language controller
         SSLOCAL_EXTERN void SetCurrentLanguage(Language nextLanguage);
-        SSLOCAL_EXTERN void SetFollowGameLanguage(bool followGameLanguage);
+
+        // these behavior should be executed by language controller from game callbacks
+        // if they're not called, the mod still works at a fallback mode.
+        // this design can make the library not game version related.
+        namespace GameCallbacks{
+            /*
+                The Loqolizer mod will:
+                call SSL10n::Database::PolyglotFormat::AddCSVContent at hooksite BGLib::Polyglot::CsvReader::Parse
+                call SSL10n::LanguageController::SetCurrentLanguage at BGLib::Polyglot::LocalizationModel::set_SelectedLanguage
+
+                without the Loqolizer mod, all mods will stay in english.
+            */
+        }
 
         namespace TraditionalChinese{
             bool isPreferSimplifiedChinese();

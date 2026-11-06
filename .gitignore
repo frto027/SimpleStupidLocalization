@@ -70,3 +70,5 @@ mod.json.schema
 
 # tests
 tests/*.run
+
+compile_commands.json
