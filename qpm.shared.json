@@ -60,11 +60,6 @@
         "additionalData": {}
       },
       {
-        "id": "bs-cordl",
-        "versionRange": "^4503.0.0",
-        "additionalData": {}
-      },
-      {
         "id": "scotland2",
         "versionRange": "^0.1.7",
         "additionalData": {
@@ -113,30 +108,6 @@
         }
       },
       "version": "1.3.1"
-    },
-    {
-      "dependency": {
-        "id": "bs-cordl",
-        "versionRange": "=4503.0.0",
-        "additionalData": {
-          "headersOnly": true,
-          "branchName": "version/v4503_0_0",
-          "compileOptions": {
-            "includePaths": [
-              "include"
-            ],
-            "cppFeatures": [],
-            "cppFlags": [
-              "-fdeclspec",
-              "-DUNITY_6",
-              "-DUNITY_6_3",
-              "-DHAS_CODEGEN",
-              "-Wno-invalid-offsetof"
-            ]
-          }
-        }
-      },
-      "version": "4503.0.0"
     },
     {
       "dependency": {
