@@ -16,6 +16,9 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
 add_compile_options(-frtti -fexceptions -fvisibility=hidden -fvisibility-inlines-hidden -O3)
 
+# stop libc++ / static library symbols leaking
+add_link_options(-Wl,--exclude-libs,ALL)
+
 # Expose definitions from qpm_defines.cmake
 add_compile_definitions(VERSION="${MOD_VERSION}")
 add_compile_definitions(MOD_ID="${MOD_ID}")
