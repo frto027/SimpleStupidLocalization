@@ -6,7 +6,24 @@ a **backend** library for Simple Stupid Localization
 
 All mods shares the same key pool, so prefix your key with something like your mod id.
 
-add this library to your `qpm.json` and rerun `qpm restore`
+## version matrix
+
+The lib is designed to be a global library. But you need a version number for mod compat.
+
+This table is only document for suggestion. Update it if needed.
+
+ game ver | library ver | comment
+---|---|---
+1.37.0 | N/A | not released
+1.40.4 | N/A | not released
+1.40.5 | N/A | not released
+1.40.6 | N/A | not released
+1.40.7 | N/A | not released
+1.40.8 | ^0.7.0 |
+1.45.3 | ^0.16.0| not released
+
+
+add this library to your `qpm.json` and rerun `qpm restore`. make sure you're using a proper version.
 
 ```json
     {
