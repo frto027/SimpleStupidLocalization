@@ -10,17 +10,15 @@ All mods shares the same key pool, so prefix your key with something like your m
 
 The lib is designed to be a global library. But you need a version number for mod compat.
 
-This table is only document for suggestion. Update it if needed.
-
- game ver | library ver | comment
+ beatsaber-hook version | sslocalization ver | comment
 ---|---|---
-1.37.0 | N/A | not released
-1.40.4 | N/A | not released
-1.40.5 | N/A | not released
-1.40.6 | N/A | not released
-1.40.7 | N/A | not released
-1.40.8 | ^0.7.0 |
-1.45.3 | ^0.16.0| not released
+N/A | N/A | game 1.37.0, not released
+N/A | N/A | game 1.40.4, not released
+N/A | N/A | game 1.40.5, not released
+N/A | N/A | game 1.40.6, not released
+N/A | N/A | game 1.40.7, not released
+6.\*.\* | ^0.7.0 | bshook 6.4.1, game 1.40.8
+9.\*.\* | ^0.16.0| bshook 9.4.3, game 1.45.3
 
 
 add this library to your `qpm.json` and rerun `qpm restore`. make sure you're using a proper version.
